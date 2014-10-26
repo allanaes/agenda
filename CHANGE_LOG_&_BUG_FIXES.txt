@@ -1,0 +1,239 @@
+CHANGE LOG & BUG FIXES:
+
+PENTING:
+Jalankan perintah:
+      php artisan migrate
+untuk mengupdate schema database agar update aplikasi ini dapat berjalan dengan baik.
+
+/********************************************************************************/
+* Date Fix: [25/09/2013]
+* File: ./pelayanan/application/models/user.php
+* Line: 62
+* Semula:
+if (($to_tipe == $daftar_tipe['user']) && ($admin_count == 1) && ($to_tipe != $daftar_tipe['user'])) {
+
+* Menjadi:
+if (($to_tipe == $daftar_tipe['user']) && ($admin_count == 1) && ($current_tipe != $daftar_tipe['user'])) {
+
+/********************************************************************************/
+* Date Fix: [27/09/2013]
+* File:
+./pelayanan/application/models/liberation.php
+* Line: 54
+* Semula:
+   $daftar_disposisi = Disposisi::get();
+   $array_nama = array();
+
+   foreach($daftar_disposisi as $row) {
+    $array_nama[$row->id] = $row->nama;
+   }  
+
+   $array_disposisi = explode(',', $record->disposisi);   
+   
+   foreach($array_disposisi as $key => $value) {
+    $array_id[$key] = $array_nama[$value];
+   }
+
+   $nama_disposisi = implode(', ', $array_id);
+
+* Menjadi:
+   $nama_disposisi = Suratmasuk::disposisi_id_to_name($record->disposisi);
+
+/********************************************************************************/
+* Date Fix: [30/09/2013]
+* File:
+./pelayanan/agenda/css/style.css
+* Line: 264
+* Hapus baris 264 yang berisi:
+  font: inherit;
+
+***Keterangan
+Tambahan style "font: inherit;" menyebabkan button tidak ter-align dengan button lainnya
+dan heightnya pun tidak sama. Style tersebut tidak diperlukan sehingga perlu dihapus dari
+style.
+
+/********************************************************************************/
+* Date Fix: [01/10/2013]
+* Fix:
+- edit file migrations untuk schema surat keluar dan jenis surat,
+- edit structure database untuk size field jenis_surat pada tabel
+  surat keluar dan jenis surat.
+* Ket:
+Schema database untuk field jenis_surat pada tabel "jenis_surat" dan "surat_keluar"
+dari size 5 menjadi 10 karakter.
+
+****Workaround
+- Untuk instalasi baru: otomatis schema database menggunakan maksimal 10 karakter.
+- Untuk instalasi sebelum fix ini: edit manual schema pada database tabel "jenis_surat"
+  dan "surat_keluar".
+
+/********************************************************************************/
+* Date: [07/10/2013]
+* Tambahan widget tanggal pada input form (pada edit form tidak ditambahkan).
+
+/********************************************************************************/
+* Date: [09/10/2013]
+* Fix padding pada widget tanggal, sehingga line-height antar input pada form tidak 
+  berubah.
+
+/********************************************************************************/
+* Date: [11/10/2013]
+* Fix layout untuk widget tanggal.
+
+/********************************************************************************/
+* Date: [07/11/2013]
+* BUG FIXES direname menjadi CHANGE LOG & BUG FIXES
+
+/********************************************************************************/
+* Date: [07/11/2013]
+* Tambahan highlight pada tabel surat masuk dan surat keluar untuk item yang baru
+direkam (highlight pada baris pertama).
+
+/********************************************************************************/
+* Date: [29/11/2013]
+* Restrict akses ke untuk directory listing dengan menambahkan opsi:
+Options -Indexes
+
+* pada .htaccess
+
+/********************************************************************************/
+* Date: [03/12/2013]
+* Ubah layout pada halaman index Settings dengan menukar tabel daftar disposisi
+* dan daftar surat berada di bawah. Kedua daftar ini lebih fleksibel sehingga
+* layout terlihat kurang rapi apabila jumlah daftarnya semakin banyak.
+
+/********************************************************************************/
+* Date: [03/12/2013]
+* *****************CRITICAL BUG **** FIXED [06/12/2013]****:
+* Apabila terjadi pergantian tahun pada config, Nomor Agenda Seksi tidak direset
+ke nomor 1 dalam hal:
+- Surat Keluar digunakan mendahului penggunaan Surat Masuk saat pergantian
+  tahun pada config.
+- Surat Keluar belum pernah digunakan sama sekali.
+* Seharusnya, nomor Agenda seksi direset ke 1 apabila pada config terjadi
+* perubahan tahun.
+*
+* Workaround:
+* - Input surat masuk terlebih dahulu saat pergantian tahun ATAU
+* - Koreksi nomor agenda seksi secara manual pada database (sekali saja).
+*
+* Code fix: belum dapat diimplementasikan dengan sempurna apabila hanya
+* menggunakan metode checking. Harus mengubah schema database surat masuk
+* dengan menambahkan tahun surat apabila diinginkan penomoran otomatis
+* minim bug.
+
+/********************************************************************************/
+* Date: [06/12/2013]
+* Schema tabel Jenis Surat ditambahkan kolom 'aktif', sehingga hanya jenis surat
+* dengan status aktif saja yang akan digunakan dalam pembuatan Surat Keluar.
+* Pastikan untuk menjalankan:
+php artisan migrate
+
+
+/********************************************************************************/
+* Date: [06/12/2013]
+* Schema tabel Surat Masuk ditambahkan kolom 'tahun_buku', sehingga penomoran
+* nomor agenda otomatis dapat direset jika ada pergantian tahun dan dilanjutkan
+* apabila dengan tahun yang sama (atau pernah digunakan).
+*
+* Pastikan untuk menjalankan:
+php artisan migrate
+
+* CRITICAL BUG [03/12/2013] --> FIXED
+
+/********************************************************************************/
+* Date: [19/12/2013]
+* *****************CRITICAL BUG ****
+* DESIGN FLAW pada model Surat Keluar. Kesalahan logic karena merekam langsung
+* NAMA pengirimnya, seharusnya row ID-nya (bukan NIP), karena NAMA boleh sama
+* dan akan menimbulkan bug pada menu Edit Surat Keluar dan Print Daftar Surat Keluar.
+*
+* To-do:
+* - remodel Surat Keluar agar merekam ID pengirimnya
+* - migrate records Surat Keluar lama dengan mengalter field Pengirim dari NAMA
+*   pengirim ke ID pengirim
+*
+* Workaround:
+* - Hindari penggunaan NAMA dengan karakter yang sama.
+
+/********************************************************************************/
+* Date: [02/01/2014]
+* *****************CRITICAL BUG **** FIXED [02/01/2014]****:
+* Field tahun_buku terhapus saat dilakukan cleaning input, akibatnya yg terekam
+* pada surat masuk adalah tahun default yaitu 2013. Pada konfigurasi adalah
+* tahun 2014, efek CRITICAL-nya membuat Nomor Agenda Seksi tidak ditemukan
+* dan distart ulang dari 1 terus.
+*
+* Fix:
+* Edit file: ../pelayanan/application/models/suratmasuk.php
+* Baris: 249
+* Semula:
+      'catatan'
+* Menjadi:
+      'catatan',
+      'tahun_buku'
+* Dengan ini, 'tahun_buku' masuk dalam whitelist saat dilakukan cleaning input.
+
+/********************************************************************************/
+* Date: [10/01/2014]
+* New Features:
+* - Input Surat Keluar secara massal.
+*   Mekanisme: sama seperti input surat keluar biasa, hanya saja untuk daftar
+*              tujuan dipisah dengan tanda titik-koma.
+* - Sort Order pada form search daftar surat masuk dan surat keluar.
+
+/********************************************************************************/
+* Date: [22/01/2014]
+* Fix minor CSS styling untuk form input surat keluar massal.
+
+/********************************************************************************/
+* Date: [13/05/2014]
+* Minor styling warna text yang nonaktif pada Daftar Disposisi/Jenis Surat dimute
+  sehingga daftar yang aktif lebih terlihat.
+
+/********************************************************************************/
+* Date: [01/07/2014]
+* Menambahkan rules 'unique' untuk field Nomor Surat pada form input Surat Masuk
+  untuk mencegah penginputan ganda.
+
+  Jika tidak diinginkan harus 'unique', hapus rules tersebut pada file:
+    ./pelayanan/application/models/suratmasuk.php
+
+  dari:
+    'nomor_surat' => 'required|unique:surat_masuk,nomor_surat',
+
+  menjadi:
+    'nomor_surat' => 'required',
+
+  Nomor Agenda Sekre tidak perlu di-rule 'unique'.
+
+/********************************************************************************/
+* Date: [04/07/2014]
+* Fix minor styling untuk detail Surat Masuk, menambahkan class "span7" sehingga
+  tabel tidak melebar untuk konten (hal) Surat Masuk yang panjang.
+* Edit file:
+  ../application/views/partial/suratmasuk/suratmasuk_view_table.blade.php
+* Baris: 2
+
+/********************************************************************************/
+* Date: [02/09/2014]
+* New Features:
+* - Guest mode, login default:
+*       username: guest
+*       password: guest
+*   Penggantian username dan password untuk Guest hanya dapat dilakukan oleh Admin
+*
+* TO DO or FUTURE FEATURE: log akses pengguna aplikasi
+
+/********************************************************************************/
+* Date: [03/09/2014]
+* Fix: rules untuk routing (routes.php)
+* Fix: restrict render partial view untuk menu-menu yg tidak dapat diakses Guest
+* Fix: konsistensi lebar kolom Keterangan pada tabel
+* Fix: admin tidak dapat mereset akun user atau guest jika total admin hanya satu
+
+/********************************************************************************/
+* Date: [17/10/2014]
+* New Features:
+* JQuery UI: DatePicker
+* Change: index.htm dengan redirect menjadi index.php dengan header location.

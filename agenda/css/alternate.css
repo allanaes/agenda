@@ -1,0 +1,87 @@
+@page {
+	size:8.5in 11in;
+	margin-left: 10mm;
+	margin-right: 10mm;
+	margin-top: 15mm;
+}
+
+@page rotated {
+	size : landscape;
+}
+
+body {
+	font-size: 8pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+	width: 100%;	
+	border-spacing: 0px;
+}
+
+thead {
+	border-top: 1pt solid #000;	
+}
+
+thead {
+	display: table-header-group;
+}
+
+.text-red {
+	color: #d14;
+ 	font-weight: bolder;
+ }
+
+.tableprint {
+	border: 1pt solid #000;
+ 	border-collapse: collapse;
+ }
+
+.tableprint td, .tableprint th {
+	border: 1pt solid #000;
+	padding: .5em;
+	vertical-align: top;
+}
+
+.tableprint th {
+	background-color: #D6DDE6;
+	vertical-align: middle;
+ }
+
+.span5 {
+	width: 300px;
+ }
+
+.span4 {
+	width: 240px;
+ }
+
+.span3_5 {
+	width: 220px;
+ }
+ 
+.span3 {
+	width: 180px;
+ }
+
+.span2 {
+	width: 120px;
+ }
+
+.span1 {
+	width: 60px;
+ }
+
+ .input-small {
+	width: 30px;
+	text-align: center;
+ }
+
+.extrapadding {
+	height: 3em;
+	min-height: 3em;	
+}
+
+.centered {
+	text-align: center;
+}

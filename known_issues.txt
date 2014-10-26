@@ -1,0 +1,6 @@
+Known issues:
+Chrome:
+- font tidak smooth saat printing lembar disposisi
+
+Opera:
+- border checkbox tertutupi background putih dari character check

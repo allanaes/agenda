@@ -1,0 +1,15 @@
+Known Bugs:
+- Menggunakan nama yang sama persis pada Daftar Disposisi membuat
+  record Surat Keluar tercampur saat dilakukan pencarian dan pencetakan
+  daftar surat keluar.
+
+  @workaround:
+    Gunakan nama berbeda pada Daftar Disposisi (tidak harus menggunakan nama
+    full atau nama sebenarnya, terserah pengguna :)
+
+  @todo:
+    - rewrite code untuk merekam ID pengirim, bukan nama pengirimnya
+    - melakukan migration untuk record surat lama
+    ** catatan: untuk saat ini belum ada urgensi untuk melakukan @todo,
+                sehingga disarankan untuk melakukan @workaround untuk
+                menghindari bugs ini.
