@@ -237,3 +237,9 @@ php artisan migrate
 * New Features:
 * JQuery UI: DatePicker
 * Change: index.htm dengan redirect menjadi index.php dengan header location.
+
+/********************************************************************************/
+* Date: [20/11/2014]
+* Menghapus rule 'unique' untuk field Nomor Surat, rule 'unique' tricky untuk
+  mengizinkan karakter tertentu lebih dari satu kali input. Membatalkan perubahan
+  pada * Date: [01/07/2014]

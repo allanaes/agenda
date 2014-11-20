@@ -9,7 +9,7 @@ class Suratmasuk extends Eloquent {
 	public static $rules = array(
 		'tgl_diterima' => 'required|date_format:d/m/Y',
 		'nomor_agenda_sekre' => 'required',
-		'nomor_surat' => 'required|unique:surat_masuk,nomor_surat',
+		'nomor_surat' => 'required',
 		'tgl_surat' => 'required|date_format:d/m/Y',
 		'pengirim' => 'required',
 		'hal' => 'required',

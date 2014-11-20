@@ -2,6 +2,11 @@
 	<div class="row span7">
 		<h4>Daftar Petunjuk</h4>
 		<div class='row'>
+			<div class="alert alert-error">
+				<strong>Penting!</strong> Petunjuk yang telah diinput lebih dulu tidak dapat lagi diubah. Silakan Undo/Replace apabila ada kesalahan sebelum menambahkan Petunjuk baru.
+			</div>
+		</div>
+		<div class='row'>
 			<div class="alert alert-info">
 				<strong>Perhatian!</strong> Maksimum daftar petunjuk terbatas hanya 11 entri agar dalam pembuatan lembar disposisi, layout tidak broken.
 			</div>

@@ -1,6 +1,11 @@
 @section('settings_jenissurat')
 	<div class="row span7">
 		<h4>Daftar Jenis Surat</h4>
+		<div class='row'>
+			<div class="alert alert-error">
+				<strong>Penting!</strong> Jenis Surat yang telah diinput lebih dulu tidak dapat lagi diubah. Silakan Undo/Replace apabila ada kesalahan sebelum menambahkan Jenis Surat baru.
+			</div>
+		</div>
 		<table class="borderedtable">
 			<thead>
 				<th>#</th>
