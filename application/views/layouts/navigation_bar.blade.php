@@ -1,21 +1,20 @@
 <div class="navbar">
 	<div class="control">
-		<div class="menu"><i class="icon-home"></i> {{ HTML::decode(HTML::link_to_route('beranda', 'Beranda')) }}</div>	
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('beranda', '<i class="icon-home icon-white"></i> Beranda')) }}</div>	
 		
-		<div class="menu"><span class="nav-divider">·</span></div>
-		<div class="menu"><i class="icon-inbox"></i> {{ HTML::decode(HTML::link_to_route('suratmasuk', 'Input surat masuk')) }}</div>	
-		<div class="menu"><i class="icon-search"></i> {{ HTML::decode(HTML::link_to_route('search_suratmasuk', 'Cari / print daftar surat masuk')) }}</div>		
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('suratmasuk', '<i class="icon-inbox icon-white"></i> Input surat masuk')) }}</div>	
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratmasuk', '<i class="icon-search icon-white"></i> Cari / print daftar surat masuk')) }}</div>		
 
-		<div class="menu"><span class="nav-divider">·</span></div>
-		<div class="menu"><i class="icon-list-alt"></i> {{ HTML::decode(HTML::link_to_route('suratkeluar', 'Input surat keluar')) }}</div>
-		<div class="menu"><i class="icon-search"></i> {{ HTML::decode(HTML::link_to_route('search_suratkeluar', 'Cari / print daftar surat keluar')) }}</div>
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('suratkeluar', '<i class="icon-list-alt icon-white"></i> Input surat keluar')) }}</div>
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratkeluar', '<i class="icon-search icon-white"></i> Cari / print daftar surat keluar')) }}</div>
 
-		<div class="menu"><span class="nav-divider">·</span></div>
-		<div class="menu"><i class="icon-cog"></i> {{ HTML::decode(HTML::link_to_route('settings', 'Settings')) }}</div>
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('settings', '<i class="icon-cog icon-white"></i> Settings')) }}</div>
 
 		@if (Auth::check())
-		<div class="menu"><span class="nav-divider">·</span></div>
-		<div class="menu"><span class="muted">{{ User::filtered_fullname() }}</span> {{ HTML::decode(HTML::link('logout', '[ Logout ]')) }}</div>
+		<div class="menu"><span class="muted username">{{ User::filtered_fullname() }}</span>{{ HTML::decode(HTML::link('logout', '<i class="icon-off icon-white"></i> Logout')) }}</div>
 		@endif
+	</div>
+	<div class="control-left">
+		<div class="header-img">{{ HTML::image('img/header.png', "Agenda Surat") }}</div>
 	</div>
 </div>

@@ -243,3 +243,7 @@ php artisan migrate
 * Menghapus rule 'unique' untuk field Nomor Surat, rule 'unique' tricky untuk
   mengizinkan karakter tertentu lebih dari satu kali input. Membatalkan perubahan
   pada * Date: [01/07/2014]
+
+/********************************************************************************/
+* Date: [09/12/2014]
+* NEW FLAT STYLE: MS website style's rip ;)

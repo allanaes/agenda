@@ -17,9 +17,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php $db_surat_masuk = ($pagination_surat_masuk_locked) ? $suratmasuks : $suratmasuks->results; ?>
+			<?php $j = 0; ?>
+			<?php $db_surat_masuk = ($pagination_surat_masuk_locked) ? $suratmasuks : $suratmasuks->results; ?>
 			@foreach($db_surat_masuk as $suratmasuk)				
-				<tr>
+				@if($j % 2 == 0)
+				<tr class="tr-alt">
+				@else
+				<tr>				
+				@endif
+					<?php $j++ ?>
 					<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
 					<td>{{ e($suratmasuk->nomor_surat) }}</td>
 					<td>{{ e($suratmasuk->tgl_surat) }}</td>

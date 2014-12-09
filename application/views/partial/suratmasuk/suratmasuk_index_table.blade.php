@@ -20,14 +20,19 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php $i = 1; // variabel initial untuk highlight row saat ada item baru diinput ?>
+			<?php
+				$i = 1; // variabel initial untuk highlight row saat ada item baru diinput
+			 	$j = 0; ?>
 			@foreach($suratmasuks->results as $suratmasuk)				
 				@if(($i == 1) && (Session::has('message')) )
 				<tr class="alert">
 				<?php $i++; // delete availability untuk highlight item baru jika sudah digunakan ?>
+				@elseif($j % 2 == 0)
+				<tr class="tr-alt">
 				@else
-				<tr>
+				<tr>				
 				@endif				
+					<?php $j++ ?>
 					<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
 					<td>{{ e($suratmasuk->nomor_surat) }}</td>
 					<td>{{ e($suratmasuk->tgl_surat) }}</td>

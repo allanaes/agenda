@@ -45,7 +45,9 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php $i = 1; // variabel initial untuk highlight row saat ada item baru diinput ?>
+			<?php
+				$i = 1; // variabel initial untuk highlight row saat ada item baru diinput
+			 	$j = 0; ?>
 			@foreach($suratkeluars->results as $suratkeluar)
 				<?php
 					$nomor_surat = $suratkeluar->jenis_surat .
@@ -55,11 +57,14 @@
 				?>
 
 				@if(($i == 1) && (Session::has('message')) )
-				<tr class="alert">
+				<tr class="tr-alt alert">
 				<?php $i++; // delete availability untuk highlight item baru jika sudah digunakan ?>
+				@elseif($j % 2 == 0)
+				<tr class="tr-alt">
 				@else
 				<tr>
-				@endif	
+				@endif
+					<?php $j++ ?>
 					<td>{{ $nomor_surat }}</td>
 					<td>{{ e($suratkeluar->tgl_surat) }}</td>
 					<td>{{ e($suratkeluar->tujuan) }}</td>

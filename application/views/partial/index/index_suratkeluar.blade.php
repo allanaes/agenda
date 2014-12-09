@@ -13,6 +13,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php $j = 0; ?>
 			<?php $db_surat_keluar = ($pagination_surat_keluar_locked) ? $suratkeluars : $suratkeluars->results; ?>
 			@foreach($db_surat_keluar as $suratkeluar)
 				<?php
@@ -21,7 +22,12 @@
 								   $suratkeluar->kode_surat .
 								   $suratkeluar->tahun;
 				?>
-				<tr>
+				@if($j % 2 == 0)
+				<tr class="tr-alt">
+				@else
+				<tr>				
+				@endif
+					<?php $j++ ?>
 					<td>{{ $nomor_surat }}</td>
 					<td>{{ e($suratkeluar->tgl_surat) }}</td>
 					<td>{{ e($suratkeluar->tujuan) }}</td>

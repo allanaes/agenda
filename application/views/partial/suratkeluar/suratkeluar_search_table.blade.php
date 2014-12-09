@@ -31,6 +31,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php $j = 0; ?>
 			@foreach($suratkeluars->results as $suratkeluar)
 				<?php
 					$nomor_surat = $suratkeluar->jenis_surat .
@@ -38,7 +39,12 @@
 								   $suratkeluar->kode_surat .
 								   $suratkeluar->tahun;
 				?>
-				<tr>
+				@if($j % 2 == 0)
+				<tr class="tr-alt">
+				@else
+				<tr>				
+				@endif
+					<?php $j++ ?>
 					<td>{{ $nomor_surat }}</td>
 					<td>{{ e($suratkeluar->tgl_surat) }}</td>
 					<td>{{ e($suratkeluar->tujuan) }}</td>

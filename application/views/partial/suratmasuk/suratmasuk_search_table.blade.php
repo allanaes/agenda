@@ -32,8 +32,14 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php $j = 0; ?>
 			@foreach($suratmasuks->results as $suratmasuk)				
-				<tr>
+				@if($j % 2 == 0)
+				<tr class="tr-alt">
+				@else
+				<tr>				
+				@endif
+					<?php $j++ ?>
 					<td class="idfield">{{ e($suratmasuk->id) }}</td>
 					<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
 					<td>{{ e($suratmasuk->nomor_surat) }}</td>

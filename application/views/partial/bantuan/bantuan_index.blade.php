@@ -69,9 +69,9 @@
  * Agenda Surat
  *
  * @author      <808320277>
- * @version     0.9.2.20141017
+ * @version     0.9.5.20141209
  * @link        http://twitter.com/allanaes
- * @lastupdated 10.2014
+ * @lastupdated 12.2014
  *
  */
 		</pre>

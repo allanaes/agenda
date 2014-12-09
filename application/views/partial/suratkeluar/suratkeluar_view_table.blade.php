@@ -8,15 +8,15 @@
 				<i class="icon-edit"></i> {{ HTML::link_to_route('edit_suratkeluar', 'Edit Surat', $suratkeluar->id) }}
 			</p>
 		@endif
-			<table class="borderedtable">
-				<tr><td class="span2">Nomor Surat:</td><td> {{ $suratkeluar->nomor_surat_alt }}</td>
-				<tr><td>Tanggal:</td><td> {{ e($suratkeluar->tgl_surat) }}</td>
-				<tr><td>Tujuan:</td><td> {{ e($suratkeluar->tujuan) }}</td>
-				<tr><td>Hal:</td><td> {{ e($suratkeluar->hal) }}</td>
-				<tr><td>Pengirim:</td><td> {{ e($suratkeluar->pengirim) }}</td>
-				<tr><td>Perekam:</td><td> {{ e($suratkeluar->perekam) }}</td>
-				<tr><td>Tanggal Rekam:</td><td> {{ $suratkeluar->created_at }}</td>
-				<tr><td>Tanggal Update:</td><td> {{ $suratkeluar->updated_at }}</td>
+			<table class="viewtable">
+				<tr><th class="span2">Nomor Surat:</th><td> {{ $suratkeluar->nomor_surat_alt }}</td>
+				<tr><th>Tanggal:</th><td> {{ e($suratkeluar->tgl_surat) }}</td>
+				<tr><th>Tujuan:</th><td> {{ e($suratkeluar->tujuan) }}</td>
+				<tr><th>Hal:</th><td> {{ e($suratkeluar->hal) }}</td>
+				<tr><th>Pengirim:</th><td> {{ e($suratkeluar->pengirim) }}</td>
+				<tr><th>Perekam:</th><td> {{ e($suratkeluar->perekam) }}</td>
+				<tr><th>Tanggal Rekam:</th><td> {{ $suratkeluar->created_at }}</td>
+				<tr><th>Tanggal Update:</th><td> {{ $suratkeluar->updated_at }}</td>
 			</table>
 	</div>
 @endsection
