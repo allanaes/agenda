@@ -583,6 +583,7 @@ textarea.span6 {
 .nav-tabs li a:hover {
 	padding-bottom: 6px;
 	border: 1px solid #0072C6;
+	border-bottom: 0;
 	padding-right: 14px;
 	padding-left: 15px;
 	padding-top: 5px;

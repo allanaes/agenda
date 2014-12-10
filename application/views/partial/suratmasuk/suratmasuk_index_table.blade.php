@@ -25,7 +25,7 @@
 			 	$j = 0; ?>
 			@foreach($suratmasuks->results as $suratmasuk)				
 				@if(($i == 1) && (Session::has('message')) )
-				<tr class="alert">
+				<tr class="tr-alt alert">
 				<?php $i++; // delete availability untuk highlight item baru jika sudah digunakan ?>
 				@elseif($j % 2 == 0)
 				<tr class="tr-alt">
