@@ -3,10 +3,10 @@
 		<div class="menu">{{ HTML::decode(HTML::link_to_route('beranda', '<i class="icon-home icon-white"></i> Beranda')) }}</div>	
 		
 		<div class="menu">{{ HTML::decode(HTML::link_to_route('suratmasuk', '<i class="icon-inbox icon-white"></i> Input surat masuk')) }}</div>	
-		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratmasuk', '<i class="icon-search icon-white"></i> Cari / print daftar surat masuk')) }}</div>		
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratmasuk', '<i class="icon-search icon-white"></i> Cari / print surat masuk')) }}</div>		
 
 		<div class="menu">{{ HTML::decode(HTML::link_to_route('suratkeluar', '<i class="icon-list-alt icon-white"></i> Input surat keluar')) }}</div>
-		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratkeluar', '<i class="icon-search icon-white"></i> Cari / print daftar surat keluar')) }}</div>
+		<div class="menu">{{ HTML::decode(HTML::link_to_route('search_suratkeluar', '<i class="icon-search icon-white"></i> Cari / print surat keluar')) }}</div>
 
 		<div class="menu">{{ HTML::decode(HTML::link_to_route('settings', '<i class="icon-cog icon-white"></i> Settings')) }}</div>
 

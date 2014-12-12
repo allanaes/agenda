@@ -11,7 +11,7 @@ body {
 	max-width: 940px;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 56px;
+	margin-top: 76px;
 }
 
 p {
@@ -454,9 +454,9 @@ th {
 	display: inline-block;
 	float: left;
 	width: 100%;
-	height: 36px;
+	min-height: 36px;
 	margin: 0;
-	margin-bottom: 15px;
+	margin-bottom: 24px;
 	position: fixed;
 }
 .navbar .control-left {
@@ -500,6 +500,14 @@ th {
 .nav-divider {
 	font-size: 1.3em;
 	color: #999;
+}
+
+.header-img {
+	height: 36px;
+}
+
+@media only screen and (max-width: 1024px) {
+	.header-img {display:none}
 }
 
 /* end navigation bar styling */
