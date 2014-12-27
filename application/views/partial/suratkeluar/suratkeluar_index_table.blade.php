@@ -47,13 +47,26 @@
 			<tbody>
 			<?php
 				$i = 1; // variabel initial untuk highlight row saat ada item baru diinput
-			 	$j = 0; ?>
+			 	$j = 0;
+			 	$prev_date = ''; ?>
 			@foreach($suratkeluars->results as $suratkeluar)
 				<?php
 					$nomor_surat = $suratkeluar->jenis_surat .
 								   '<span class="text-red">' . $suratkeluar->nomor_urut . '</span>' .
 								   $suratkeluar->kode_surat .
 								   $suratkeluar->tahun;
+				?>
+
+				<?php
+					// generate row pemisah antar tanggal perekaman
+					$date_created = date_create_from_format('Y-m-d', substr($suratkeluar->created_at, 0, 10))->getTimestamp();
+					$created = date('d M Y', $date_created);
+					if ($created != $prev_date) {
+						echo '<tr> <td colspan="7"><h6> ' . $created .'</h6></td></tr>';
+						$prev_date = $created;
+					} else {
+						$prev_date = $created;
+					}
 				?>
 
 				@if(($i == 1) && (Session::has('message')) )

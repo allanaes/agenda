@@ -22,8 +22,20 @@
 			<tbody>
 			<?php
 				$i = 1; // variabel initial untuk highlight row saat ada item baru diinput
-			 	$j = 0; ?>
-			@foreach($suratmasuks->results as $suratmasuk)				
+			 	$j = 0;
+			 	$prev_date = ''; ?>
+			@foreach($suratmasuks->results as $suratmasuk)
+				<?php
+					// generate row pemisah antar tanggal perekaman
+					$date_created = date_create_from_format('Y-m-d', substr($suratmasuk->created_at, 0, 10))->getTimestamp();
+					$created = date('d M Y', $date_created);
+					if ($created != $prev_date) {
+						echo '<tr> <td colspan="7"><h6> ' . $created .'</h6></td></tr>';
+						$prev_date = $created;
+					} else {
+						$prev_date = $created;
+					}
+				?>
 				@if(($i == 1) && (Session::has('message')) )
 				<tr class="tr-alt alert">
 				<?php $i++; // delete availability untuk highlight item baru jika sudah digunakan ?>
