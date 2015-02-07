@@ -7,10 +7,29 @@ class Suratkeluar extends Eloquent {
 	 * Rules untuk create dan update surat keluar.
 	 */
 	public static $rules = array(
-		'tujuan'=>'required',
+		'jenis'=>'required',
 		'hal'=>'required',
 		'tanggal'=>'required|date_format:d/m/Y',
 		'pengirim'=>'required',
+		'tujuan'=>'required',
+	);
+
+	/**
+	 * Rules untuk upload file CSV.
+	 */
+	public static $rules_upload = array(
+		'jenis'=>'required',
+		'hal'=>'required',
+		'tanggal'=>'required|date_format:d/m/Y',
+		'pengirim'=>'required',
+		'csv_upload'=>'required|mimes:csv,txt',
+	);
+
+	/**
+	 * Rules untuk import file CSV.
+	 */
+	public static $rules_import = array(
+		'csv_file'=>'required'
 	);
 
 	/**
@@ -18,6 +37,20 @@ class Suratkeluar extends Eloquent {
 	 */
 	public static function validate($data) {
 		return Validator::make($data, static::$rules);
+	}
+
+	/**
+	 * Validate input untuk upload.
+	 */
+	public static function validate_upload($data) {
+		return Validator::make($data, static::$rules_upload);
+	}
+
+	/**
+	 * Validate input untuk import.
+	 */
+	public static function validate_import($data) {
+		return Validator::make($data, static::$rules_import);
 	}
 
 	/**
@@ -135,87 +168,90 @@ class Suratkeluar extends Eloquent {
 		return $a;
 	}
 
-	/**
-	 * Merekam surat keluar baru dengan mass assignment.
-	 */
-	public static function create_surat_massal($input) {
-		$i = $input;
-		$cfg_kode_surat = Konfigurasi::find(3)->config_value;
-		$cfg_tahun_surat = Konfigurasi::find(4)->config_value;
+	// TIDAK DIGUNAKAN, DIGANTI DENGAN upload_create()
+	//
+	//
+	// /**
+	//  * Merekam surat keluar baru dengan mass assignment.
+	//  */
+	// public static function create_surat_massal($input) {
+	// 	$i = $input;
+	// 	$cfg_kode_surat = Konfigurasi::find(3)->config_value;
+	// 	$cfg_tahun_surat = Konfigurasi::find(4)->config_value;
 
-		$jenis = Jenissurat::find($i['jenis']);
-		$pengirim = Disposisi::find($i['pengirim']);
-		$tanggal = $i['tanggal'];
-		$hal = $i['hal'];
+	// 	$jenis = Jenissurat::find($i['jenis']);
+	// 	$pengirim = Disposisi::find($i['pengirim']);
+	// 	$tanggal = $i['tanggal'];
+	// 	$hal = $i['hal'];
 
-		$array_tujuan = array_filter(explode(";", $i['tujuan']));
+	// 	$array_tujuan = array_filter(explode(";", $i['tujuan']));
 
-		$count_sk = 0;
+	// 	$count_sk = 0;
 
-		foreach ($array_tujuan as $key => $tujuan) {
-			$tujuan = trim($tujuan);
+	// 	foreach ($array_tujuan as $key => $tujuan) {
+	// 		$tujuan = trim($tujuan);
 
-			if (!empty($tujuan)) {
-				// Menentukan urutan selanjutnya untuk jenis surat X, dengan cara
-				// "mengambil nomor urut jenis surat X terakhir" untuk nanti diincrement saat direkam ke database
-				// -Fluent query-
-				// Rulesnya: apabila tahun surat terakhir masih sama dengan tahun konfigurasi
-				// surat, maka nomor urut dilanjutkan.
-				// Apabila berbeda tahun, maka direset menjadi 1.
-				$last_number = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
-						->order_by('id', 'desc')
-						->only('nomor_urut');
+	// 		if (!empty($tujuan)) {
+	// 			// Menentukan urutan selanjutnya untuk jenis surat X, dengan cara
+	// 			// "mengambil nomor urut jenis surat X terakhir" untuk nanti diincrement saat direkam ke database
+	// 			// -Fluent query-
+	// 			// Rulesnya: apabila tahun surat terakhir masih sama dengan tahun konfigurasi
+	// 			// surat, maka nomor urut dilanjutkan.
+	// 			// Apabila berbeda tahun, maka direset menjadi 1.
+	// 			$last_number = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
+	// 					->order_by('id', 'desc')
+	// 					->only('nomor_urut');
 
-				$last_surat_tahun = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
-						->order_by('id', 'desc')
-						->only('tahun');
+	// 			$last_surat_tahun = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
+	// 					->order_by('id', 'desc')
+	// 					->only('tahun');
 
-				if ($last_surat_tahun == $cfg_tahun_surat) {
-					$now_number = $last_number + 1;
-				} else {
-					$now_number = 1;
-				}
+	// 			if ($last_surat_tahun == $cfg_tahun_surat) {
+	// 				$now_number = $last_number + 1;
+	// 			} else {
+	// 				$now_number = 1;
+	// 			}
 
-				// -Eloquent query-
-				Suratkeluar::create(array(
-					'jenis_surat' => $jenis->jenis_surat,
-					'nomor_urut' => $now_number,
-					'kode_surat' => $cfg_kode_surat,
-					'tahun' => $cfg_tahun_surat,
-					'tgl_surat' => $tanggal,
-					'pengirim' => $pengirim->nama,
-					'tujuan' => $tujuan,
-					'hal' => $hal,
-					'perekam' => Auth::user()->username
-				));
+	// 			// -Eloquent query-
+	// 			Suratkeluar::create(array(
+	// 				'jenis_surat' => $jenis->jenis_surat,
+	// 				'nomor_urut' => $now_number,
+	// 				'kode_surat' => $cfg_kode_surat,
+	// 				'tahun' => $cfg_tahun_surat,
+	// 				'tgl_surat' => $tanggal,
+	// 				'pengirim' => $pengirim->nama,
+	// 				'tujuan' => $tujuan,
+	// 				'hal' => $hal,
+	// 				'perekam' => Auth::user()->username
+	// 			));
 
-				$count_sk++;
-			}
-		}
+	// 			$count_sk++;
+	// 		}
+	// 	}
 
-		// menyimpan old input untuk memudahkan penginputan surat keluar sejenis berikutnya
-		// ** field tujuan dikosongkan
-		$jenis_old = $jenis->id;
-		$tanggal_old = $tanggal;
-		$pengirim_old = $pengirim->id;
-		$hal_old = $hal;
+	// 	// menyimpan old input untuk memudahkan penginputan surat keluar sejenis berikutnya
+	// 	// ** field tujuan dikosongkan
+	// 	$jenis_old = $jenis->id;
+	// 	$tanggal_old = $tanggal;
+	// 	$pengirim_old = $pengirim->id;
+	// 	$hal_old = $hal;
 
-		// menyusun nomor surat yg baru saja direkam, untuk penerusan message :)
-		$msg = 'Surat keluar berhasil direkam sebanyak: ' . $count_sk . ' surat.';
+	// 	// menyusun nomor surat yg baru saja direkam, untuk penerusan message :)
+	// 	$msg = 'Surat keluar berhasil direkam sebanyak: ' . $count_sk . ' surat.';
 
-		// return array old input dan pesan untuk memudahkan penginputan selanjutnya
-		$a = array(
-				'message' => $msg,
-				'jenis' => $jenis_old,
-				'tanggal' => $tanggal_old,
-				'pengirim' => $pengirim_old,
-				'hal' => $hal_old,
-				'msg' => $msg
-			);
+	// 	// return array old input dan pesan untuk memudahkan penginputan selanjutnya
+	// 	$a = array(
+	// 			'message' => $msg,
+	// 			'jenis' => $jenis_old,
+	// 			'tanggal' => $tanggal_old,
+	// 			'pengirim' => $pengirim_old,
+	// 			'hal' => $hal_old,
+	// 			'msg' => $msg
+	// 		);
 
-		return $a;
+	// 	return $a;
 					
-	}
+	// }
 
 	/**
 	 * Undo surat terakhir dimaksudkan apabila terjadi kesalahan input surat
@@ -490,5 +526,187 @@ class Suratkeluar extends Eloquent {
 		unset($input['page']);
 
 		return $input;
+	}
+
+	/**
+	 * Upload file CSV dan return file pathnya.
+	 */
+	public static function upload_handle($file) {
+		
+		$file_name = $file['name'];
+		$file_tmp = $file['tmp_name'];
+		$file_size = $file['size'];
+		$file_error = $file['error'];
+
+		$file_ext = explode('.', $file_name);
+		$file_ext = strtolower(end($file_ext));
+
+		$allowed = array('txt', 'csv');
+
+		if (in_array($file_ext, $allowed)) {
+			if ($file_error === 0) {
+				// generate nama unik
+				$file_name_new = uniqid('', true) . '.' . $file_ext;
+
+				// lokasi untuk menyimpan file yang diupload
+				$file_upload_destination = $GLOBALS['laravel_paths']['public'] . '/files/' . $file_name_new;
+
+				// pindahkan file terupload dari temp ke path tujuan upload dan RETURN file pathnya
+				if (move_uploaded_file($file_tmp, $file_upload_destination)) {
+					return $file_upload_destination;
+				}
+
+			}
+		}
+
+	}
+
+	/**
+	 * Fetch file CSV untuk preview.
+	 */
+	public static function upload_preview($file) {
+		$csv_rows = array();
+
+		// detect delimiter antara ',' atau ';'
+		$allowed_header = array('tujuan');
+		
+		$csv_uploded = file($file, FILE_IGNORE_NEW_LINES);
+
+		$csv_header = str_getcsv($csv_uploded[0], ',');
+		$csv_header2 = str_getcsv($csv_uploded[0], ';');
+		if ($csv_header == $allowed_header) {
+			$csv_delimiter = ',';
+		} else if ($csv_header2 == $allowed_header) {						
+			$csv_delimiter = ';';
+		} else {
+			echo 'wrong delimiter'; // FIXME throw error
+			exit;
+		}
+
+		// push data csv ke array
+		if (isset($csv_delimiter)) {						
+			foreach ($csv_uploded as $line) {
+				$csv_rows[] = str_getcsv($line, $csv_delimiter);						
+			}
+
+			// remove header dari file csv
+			unset($csv_rows[0]);
+
+			// return array dari CSV yang diproses
+			return $csv_rows;			
+		}
+	}
+
+	/**
+	 * Rekam file CSV yang terupload.
+	 */
+	public static function upload_create($file, $input) {
+		$csv_rows = array();
+
+		// detect delimiter antara ',' atau ';'
+		$allowed_header = array('tujuan');
+		
+		$csv_uploded = file($file, FILE_IGNORE_NEW_LINES);
+
+		$csv_header = str_getcsv($csv_uploded[0], ',');
+		$csv_header2 = str_getcsv($csv_uploded[0], ';');
+		if ($csv_header == $allowed_header) {
+			$csv_delimiter = ',';
+		} else if ($csv_header2 == $allowed_header) {						
+			$csv_delimiter = ';';
+		} else {
+			echo 'wrong delimiter'; // FIXME throw error
+			exit;
+		}
+
+		// push data csv ke array
+		if (isset($csv_delimiter)) {						
+			foreach ($csv_uploded as $line) {
+				$csv_rows[] = str_getcsv($line, $csv_delimiter);
+			}
+
+			// remove header dari file csv
+			unset($csv_rows[0]);
+
+			$i = $input;
+			$cfg_kode_surat = Konfigurasi::find(3)->config_value;
+			$cfg_tahun_surat = Konfigurasi::find(4)->config_value;
+
+			$jenis = Jenissurat::find($i['jenis']);
+			$pengirim = Disposisi::find($i['pengirim']);
+			$tanggal = $i['tanggal'];
+			$hal = $i['hal'];
+
+			// remove header dari file csv
+			unset($csv_rows[0]);
+
+			$jumlah = 0;
+
+			foreach ($csv_rows as $tujuan) {
+				$tujuan = trim($tujuan[0]);
+
+				if (!empty($tujuan)) {
+					// Menentukan urutan selanjutnya untuk jenis surat X, dengan cara
+					// "mengambil nomor urut jenis surat X terakhir" untuk nanti diincrement saat direkam ke database
+					// -Fluent query-
+					// Rulesnya: apabila tahun surat terakhir masih sama dengan tahun konfigurasi
+					// surat, maka nomor urut dilanjutkan.
+					// Apabila berbeda tahun, maka direset menjadi 1.
+					$last_number = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
+							->order_by('id', 'desc')
+							->only('nomor_urut');
+
+					$last_surat_tahun = DB::table('surat_keluar')->where('jenis_surat', '=', $jenis->jenis_surat)
+							->order_by('id', 'desc')
+							->only('tahun');
+
+					if ($last_surat_tahun == $cfg_tahun_surat) {
+						$now_number = $last_number + 1;
+					} else {
+						$now_number = 1;
+					}
+
+					// -Eloquent query-
+					Suratkeluar::create(array(
+						'jenis_surat' => $jenis->jenis_surat,
+						'nomor_urut' => $now_number,
+						'kode_surat' => $cfg_kode_surat,
+						'tahun' => $cfg_tahun_surat,
+						'tgl_surat' => $tanggal,
+						'pengirim' => $pengirim->nama,
+						'tujuan' => $tujuan,
+						'hal' => $hal,
+						'perekam' => Auth::user()->username
+					));
+
+					$jumlah++;
+				}
+			}
+
+			$message = 'Surat Keluar Seksi sebanyak ' . $jumlah . ' surat berhasil direkam.';
+			
+			$a['message'] = $message;
+
+			return $a['message'];
+		}
+	}
+
+	// Kosongkan folder files hasil import dari Surat Keluar Seksi dan Surat Keluar Lain
+	public static function empty_csv_folder() {
+		// get path to csv folder
+		$folder_path = $GLOBALS['laravel_paths']['public'] . '/files/';
+
+		// scan directory
+		$files = scandir($folder_path);
+
+		// unset current and parent directory
+		unset($files[0]);
+		unset($files[1]);
+
+		// menghapus semua file csv dalam folder tersebut
+		foreach ($files as $key => $fname) {
+			$full_path_to_file = $folder_path . $fname;
+			unlink($full_path_to_file);
+		}
 	}
 }

@@ -11,7 +11,16 @@ Cara update singkat (safe):
 
 Command "php" bisa dijalankan dari command prompt jika sudah masuk dalam Path sistem. Kalau belum, masukan pathnya manual, misal: D:\wamp\bin\php\php5.4.3\php.exe artisan migrate
 
+P-E-R-H-A-T-I-A-N-!-!
+=====================
+Extension fileinfo pada PHP harus di-enable untuk dapat memanfaatkan fitur import daftar surat.
+Pada Windows:
+extension=php_fileinfo.dll
 
+atau pada GNU/Linux:
+extension=fileinfo.so
+
+=======
 Aplikasi Agenda Surat Web:
 Download atau clone repo ini.
 

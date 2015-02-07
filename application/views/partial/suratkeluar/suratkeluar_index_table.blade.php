@@ -8,7 +8,7 @@
 		</div>
 	@endif
 
-	<h2>Daftar surat keluar yang terakhir diinput:</h2>
+	<h2>Daftar surat keluar seksi yang terakhir diinput:</h2>
 
 	<div class="row">			
 		<?php

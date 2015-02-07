@@ -126,6 +126,12 @@ a:visited:hover {
 	*margin-bottom: 0;
 }
 
+.navvspace {
+	margin-top: 5px;
+	margin-bottom: 25px;
+	*margin-bottom: 0;
+}
+
 .margin-bottom {
 	margin-bottom: 2px;
 }
@@ -651,6 +657,20 @@ textarea.span6 {
 /* end breadcrumb */
 
 /*** style alert styling */
+.bordered-alert {
+	padding: 10px;
+	background-color: #fff9c4;
+	border: 1px solid #fdd835;
+	color: #C85305;
+}
+
+.bordered-ok {
+	padding: 10px;
+	background-color: #f1f8e9;
+	border: 1px solid #7cb342;
+	color: #000;
+}
+
 .alert {
 	margin-bottom: 10px;
 }
@@ -674,6 +694,7 @@ textarea.span6 {
 	
 	color: #000;
 }
+
 /* end alert styling */
 
 /* pagination */

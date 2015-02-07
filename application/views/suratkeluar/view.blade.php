@@ -8,9 +8,9 @@
     <ul class="breadcrumb">
 		<li>
 			@if (User::is_user_allowed())
-				{{ HTML::link_to_route('suratkeluar', 'Surat Keluar')}} <span class="divider">/</span>
+				{{ HTML::link_to_route('suratkeluar', 'Surat Keluar Seksi')}} <span class="divider">/</span>
 			@else
-				{{ HTML::link_to_route('search_suratkeluar', 'Pencarian Surat Keluar')}} <span class="divider">/</span>
+				{{ HTML::link_to_route('search_suratkeluar', 'Pencarian Surat Keluar Seksi')}} <span class="divider">/</span>
 			@endif
 		</li>
 	    <li class="active">Detail Surat</li>

@@ -74,6 +74,7 @@ Route::get('suratkeluar', array('before'=>'auth', 'before'=>'is_user', 'as'=>'su
 Route::get('suratkeluar/massal', array('before'=>'auth', 'before'=>'is_user', 'as'=>'suratkeluar_massal', 'uses'=>'suratkeluars@indexmassal'));
 Route::post('suratkeluar/create', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluars@create'));
 Route::post('suratkeluar/createmassal', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluars@createmassal'));
+Route::post('suratkeluar/import', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluars@import'));
 Route::get('suratkeluar/(:any?)/edit', array('before'=>'auth', 'before'=>'is_user', 'as'=>'edit_suratkeluar', 'uses'=>'suratkeluars@edit'));
 Route::put('suratkeluar/update', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluars@update'));
 Route::delete('suratkeluar/delete', array('before'=>'auth', 'before'=>'is_user', 'before'=>'crsf', 'uses'=>'suratkeluars@undo'));
@@ -81,6 +82,21 @@ Route::delete('suratkeluar/delete', array('before'=>'auth', 'before'=>'is_user',
 Route::get('suratkeluar/(:any)', array('before'=>'auth', 'as'=>'suratkeluar', 'uses'=>'suratkeluars@view'));
 Route::get('suratkeluar/search', array('before'=>'auth', 'as'=>'search_suratkeluar', 'uses'=>'suratkeluars@search'));
 Route::get('suratkeluar/print', array('before'=>'auth', 'as'=>'print_suratkeluar', 'uses'=>'suratkeluars@print'));
+
+// Route untuk surat keluar lain ----------------------------------
+// all users, no guest
+Route::get('suratkeluarlain', array('before'=>'auth', 'before'=>'is_user', 'as'=>'suratkeluarlains', 'uses'=>'suratkeluarlains@index'));
+Route::get('suratkeluarlain/massal', array('before'=>'auth', 'before'=>'is_user', 'as'=>'suratkeluarlain_massal', 'uses'=>'suratkeluarlains@indexmassal'));
+Route::post('suratkeluarlain/create', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluarlains@create'));
+Route::post('suratkeluarlain/createmassal', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluarlains@createmassal'));
+Route::post('suratkeluarlain/import', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluarlains@import'));
+Route::get('suratkeluarlain/(:any?)/edit', array('before'=>'auth', 'before'=>'is_user', 'as'=>'edit_suratkeluarlain', 'uses'=>'suratkeluarlains@edit'));
+Route::put('suratkeluarlain/update', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratkeluarlains@update'));
+Route::delete('suratkeluarlain/delete', array('before'=>'auth', 'before'=>'is_user', 'before'=>'crsf', 'uses'=>'suratkeluarlains@destroy'));
+// all users, guest ok
+Route::get('suratkeluarlain/(:any)', array('before'=>'auth', 'as'=>'suratkeluarlain', 'uses'=>'suratkeluarlains@view'));
+Route::get('suratkeluarlain/search', array('before'=>'auth', 'as'=>'search_suratkeluarlain', 'uses'=>'suratkeluarlains@search'));
+Route::get('suratkeluarlain/print', array('before'=>'auth', 'as'=>'print_suratkeluarlain', 'uses'=>'suratkeluarlains@print'));
 
 // Route settings untuk semua tipe user
 Route::get('settings', array('before'=>'auth', 'before'=>'is_user', 'as'=>'settings', 'uses'=>'settings@index'));
@@ -109,6 +125,7 @@ Route::post('settings/user/add', array('before'=>'auth','before' => 'is_admin', 
 Route::get('settings/liberation', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation', 'uses'=>'settings@liberation'));
 Route::get('settings/liberation/suratmasuk', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratmasuk', 'uses'=>'settings@liberation_suratmasuk'));
 Route::get('settings/liberation/suratkeluar', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratkeluar', 'uses'=>'settings@liberation_suratkeluar'));
+Route::get('settings/liberation/suratkeluarlain', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratkeluarlain', 'uses'=>'settings@liberation_suratkeluarlain'));
 
 // Route untuk reset profile untuk semua tipe user
 Route::post('settings/user/reset', array('before'=>'auth', 'before'=>'csrf', 'uses'=>'settings@user_reset'));

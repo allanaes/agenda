@@ -59,23 +59,54 @@ class Suratkeluars_Controller extends Base_Controller {
 		$input = Input::all();
 
 		// validasi input apakah sesuai rules (cek di model "suratkeluar")
-		$validation = Suratkeluar::validate($input);
+		$validation = Suratkeluar::validate_upload($input);
 
 		if ($validation->fails()) {
 			return Redirect::to_route('suratkeluar_massal')->with_errors($validation)->with_input();
 		} else {
-			$sk = Suratkeluar::create_surat_massal($input);
+			$file = Input::file('csv_upload');
 
-			// redirect dengan session variable untuk kemudahan input surat sejenis
-			// variablenya bisa diakses dengan function Session::get('variable')
-			return Redirect::to_route('suratkeluar_massal')
-				->with('message', $sk['msg'])
-				->with('jenis', $sk['jenis'])
-				->with('tanggal', $sk['tanggal'])
-				->with('pengirim', $sk['pengirim'])
-				->with('hal', $sk['hal']);
+			if (isset($file)) {
+				$csv_file =  Suratkeluar::upload_handle($file);
+
+				if ($csv_file) {
+					$csv_rows = Suratkeluar::upload_preview($csv_file);
+
+					return View::make('suratkeluar.preview_massal')
+						->with('title', 'Agenda Surat :: Preview Import Surat Keluar Seksi')
+						->with('csv_rows', $csv_rows)
+						->with('csv_file', $csv_file)
+						->with('input', $input);
+				} else {
+					return Redirect::to_route('suratkeluar_massal')
+						->with('warning', 'Format file tidak valid!');
+				}
+			} else {
+				return Redirect::to_route('suratkeluar_massal')->with('message', 'Unknown Error!');
+			}
 		}
 	}
+
+	public function post_import() {
+		$input = Input::all();
+
+		// validasi input apakah sesuai rules (cek di model "suratkeluar")
+		$validation = Suratkeluar::validate_import($input);
+
+
+		if ($validation->fails()) {
+			return Redirect::to_route('suratkeluar_massal')->with_errors($validation)->with_input();
+		} else {
+			$file = Input::get('csv_file');
+
+			$sk = Suratkeluar::upload_create($file, $input);
+
+			// redirect dengan message
+			return Redirect::to_route('suratkeluar')
+				->with('message', $sk);
+
+		}
+	}	
 
 	public function get_edit($id) {
 		$edit_surat = Suratkeluar::edit_surat($id);

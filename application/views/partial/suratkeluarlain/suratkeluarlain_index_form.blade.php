@@ -1,12 +1,12 @@
 @section('display_form')
 	<div class="row">
-    <ul class="breadcrumb">
-	    <li class="active"><i class="icon-tag"></i> {{ HTML::link_to_route('suratkeluar', 'Input Surat Keluar Seksi')}}<span class="divider">//</span></li>
-	    <li>
-	    	<i class="icon-tags"></i> Input Surat Keluar Seksi Massal
-	    </li>
-    </ul>
-  </div>
+		<ul class="breadcrumb">
+			<li class="active"><i class="icon-tag"></i> Input Surat Keluar Lain<span class="divider">//</span></li>
+			<li>
+				<i class="icon-download-alt"></i> {{ HTML::link_to_route('suratkeluarlain_massal', 'Import Daftar Surat Keluar Lain')}}
+			</li>
+		</ul>
+	</div>
 
 	<?php
 		/*
@@ -16,10 +16,10 @@
 		*     (teks dibawa bersama redirect di controller)
 		*/
 
-		// placeholder untuk JENIS surat
-		$placeholder_jenis = Input::old('jenis');
-		if (Session::has('jenis')) {
-			$placeholder_jenis = Session::get('jenis');
+		// placeholder untuk NOMOR SURAT
+		$placeholder_nomor_surat = Input::old('nomor_surat');
+		if (Session::has('nomor_surat')) {
+			$placeholder_nomor_surat = Session::get('nomor_surat');
 		}
 
 		// placeholder untuk TANGGAL surat
@@ -51,27 +51,15 @@
 
 	<div class="row">
 		<div class="bordered">
-			{{ Form::open('suratkeluar/createmassal', 'POST', array('files'=>true, 'enctype'=>'multipart/form-data', 'class'=>'form')) }}
+			{{ Form::open('suratkeluarlain/create', 'POST', array('class'=>'form')) }}
 				{{ Form::token() }}
 				<table class="maxwidth">
-					<p class="bordered-ok">Contoh format file CSV yang dapat digunakan: <i class="icon-file"></i> {{ HTML::link(URL::to_asset('template/template_import_surat_keluar_seksi.csv'), 'Template Import Surat Keluar Seksi') }}</p>
-
 					<tr>
 						<td class="field">
-							<?php
-								$daftar_jenis_surat = array();
-								foreach ($suratkeluars->daftar_jenis as $daftar) {
-									if ($daftar->aktif) {
-										$daftar_jenis_surat += array($daftar->id => $daftar->jenis_surat);
-									}
-								}
-							?>
-							{{ Form::label('jenis', '*Jenis:') }}
+							{{ Form::label('nomor_surat', '*Nomor Surat:') }}
 						</td>
 						<td>
-							{{ Form::select('jenis', $daftar_jenis_surat, $placeholder_jenis) }}
-							Kode: {{ Form::text('kode', e($suratkeluars->kode_surat), array('class'=>'disabled','disabled'=>'')) }}
-							Tahun: {{ Form::text('tahun', e($suratkeluars->tahun_surat), array('class'=>'disabled input-small', 'disabled'=>'')) }}
+							{{ Form::text('nomor_surat', e($placeholder_nomor_surat), array('class'=>'span6')) }}
 						</td>
 						{{ render('common.bigdate') }}
 					</tr>
@@ -90,7 +78,7 @@
 						<td class="field">
 							<?php
 								$daftar_pengirim = array();
-								foreach($suratkeluars->daftar_disposisi as $daftar) {
+								foreach($suratkeluarlains->daftar_disposisi as $daftar) {
 									if ($daftar->aktif) {
 										$daftar_pengirim += array($daftar->id => $daftar->nama);
 									}
@@ -103,6 +91,16 @@
 						</td>
 					</tr>
 
+
+					<tr>
+						<td class="field">
+							{{ Form::label('tujuan', '*Tujuan:') }}
+						</td>
+						<td>
+							{{ Form::text('tujuan', e($placeholder_tujuan), array('class'=>'span6')) }}
+						</td>
+					</tr>
+
 					<tr>
 						<td class="field">
 							{{ Form::label('hal', '*Hal:') }}
@@ -111,21 +109,12 @@
 							{{ Form::text('hal', e($placeholder_hal), array('class'=>'span6')) }}
 						</td>
 					</tr>
-
-					<tr>
-						<td class="field">
-							{{ Form::label('csv_upload', '*Tujuan:') }}
-						</td>
-						<td>{{ Form::file('csv_upload') }}
-						</td>
-					</tr>
-
 					
 					<tr>
 						<td class="field">
 						</td>
 						<td class="form-action">
-							{{ HTML::decode(Form::button('<i class="icon-check icon-white"></i> Submit untuk Preview', array('type'=>'submit'))) }}
+							{{ HTML::decode(Form::button('<i class="icon-check icon-white"></i> Submit', array('type'=>'submit'))) }}
 							{{ HTML::decode(Form::button('<i class="icon-refresh icon-white"></i> Reset', array('class'=>'alt','type'=>'reset'))) }}
 						</td>
 					</tr>

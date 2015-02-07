@@ -76,6 +76,10 @@ class Settings_Controller extends Base_Controller {
 		Liberation::liberation_suratkeluar();
 	}
 
+	public function get_liberation_suratkeluarlain() {
+		Liberation::liberation_suratkeluarlain();
+	}
+
 	public function post_disposisi_add() {
 		$input = Input::all();
 		$validation = Disposisi::validate($input);

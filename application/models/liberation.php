@@ -152,4 +152,57 @@ class Liberation extends Eloquent {
 			fputcsv($output, $row, ';');
 		}
 	}
+
+	/**
+	 * Mengquery database suratkeluarlain dan mengoutputkannya ke file CSV.
+	 */
+	public static function liberation_suratkeluarlain() {
+		// output headers so that the file is downloaded rather than displayed
+		$filename = 'data_suratkeluarlain_' . date('Y') . '_' . date('m') . '_' . date('d') .
+			'_' . date('H') . date('i') . date('s');
+
+		header('Content-Type: text/csv; charset=utf-8');
+		header("Content-disposition: attachment; filename=$filename.csv");
+		
+
+		// create a file pointer connected to the output stream
+		$output = fopen('php://output', 'w');
+		
+		// fetch data surat masuk
+		$db = Suratkeluarlain::get();
+		
+		// output the column headings
+		$headings = array(
+			'id',
+			'nomor_surat',
+			'tgl_surat',
+			'tujuan',
+			'hal',
+			'pengirim',
+			'perekam',
+			'created_at',
+			'updated_at'
+		);
+
+		// output dulu headingnya
+		fputcsv($output, $headings, ';');
+
+		// loop over the rows, outputting them
+		foreach($db as $record) {
+			$row = array(
+				$record->id,
+				$record->nomor_surat,
+				$record->tgl_surat,
+				$record->tujuan,
+				$record->hal,
+				$record->pengirim,
+				$record->perekam,
+				$record->created_at,
+				$record->updated_at				
+			);
+
+			// output row per surat
+			fputcsv($output, $row, ';');
+		}
+	}
 }

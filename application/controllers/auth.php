@@ -35,9 +35,10 @@ class Auth_Controller extends Base_Controller {
 	 */
 	public function get_logout() {
 		// Trigger: 
-		// Sebelum logout, mengkosongkan kembali isi folder 'pdf' dari file-file
-		// lembar disposisi yang digenerate.
+		// Sebelum logout, mengkosongkan kembali isi folder 'pdf' dan 'files' dari file-file
+		// lembar disposisi yang digenerate dan CSV yang diimport.
 		Printpdf::empty_pdf_folder();
+		Suratkeluar::empty_csv_folder();
 
 		Auth::logout();
 		

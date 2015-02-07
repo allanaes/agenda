@@ -40,7 +40,12 @@
 	</div>
 		
 	<div class="row">
-		<h4>Download Data Surat Keluar</h4>
+		<h4>Download Data Surat Keluar Seksi</h4>
 		<p class="indented"><i class="icon-download"></i> {{ HTML::link_to_route('settings_liberation_suratkeluar', 'Download .CSV') }}</p>
+	</div>
+
+	<div class="row">
+		<h4>Download Data Surat Keluar Lain</h4>
+		<p class="indented"><i class="icon-download"></i> {{ HTML::link_to_route('settings_liberation_suratkeluarlain', 'Download .CSV') }}</p>
 	</div>
 @endsection

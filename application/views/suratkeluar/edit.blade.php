@@ -2,13 +2,13 @@
 
 @section('content')
 	<div class='row'>
-		<h1>Edit Surat Keluar: {{ $suratkeluar->nomor_surat }}</h1>
+		<h1>Edit Surat Keluar Seksi: {{ $suratkeluar->nomor_surat }}</h1>
 	</div>		
 
 	<div class="row">
     <ul class="breadcrumb">
 	    <li>
-	    	{{ HTML::link_to_route('suratkeluar', 'Surat Keluar')}} <span class="divider">/</span>
+	    	{{ HTML::link_to_route('suratkeluar', 'Surat Keluar Seksi')}} <span class="divider">/</span>
 	    </li>
 	    <li>
 	    	{{ HTML::link_to_route('suratkeluar', 'Detail Surat', $suratkeluar->id)}} <span class="divider">/</span>

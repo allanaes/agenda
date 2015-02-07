@@ -1,19 +1,19 @@
 @section('display_form')
 	<div class="row">
-    <ul class="breadcrumb">
-	    <li class="active"><i class="icon-tag"></i> Input Surat Keluar<span class="divider">//</span></li>
-	    <li>
-	    	<i class="icon-tags"></i> {{ HTML::link_to_route('suratkeluar_massal', 'Input Surat Keluar Massal')}}
-	    </li>
-    </ul>
-  </div>
+		<ul class="breadcrumb">
+			<li class="active"><i class="icon-tag"></i> Input Surat Keluar Seksi<span class="divider">//</span></li>
+			<li>
+				<i class="icon-tags"></i> {{ HTML::link_to_route('suratkeluar_massal', 'Input Surat Keluar Seksi Massal')}}
+			</li>
+		</ul>
+	</div>
 
 	<?php
 		/*
 		* placeholder teks setiap input field untuk memudahkan input surat yg sama
 		* baris Input::old('field') mengambil teks yang sama sebelumnya diinput apabila terjadi error
 		* baris Session::get('field') mengambil teks dari SURAT SEBELUMNYA yg berhasil diinput
-		*     (teks dibawa bersama redirect di controller)
+		*	 (teks dibawa bersama redirect di controller)
 		*/
 
 		// placeholder untuk JENIS surat
