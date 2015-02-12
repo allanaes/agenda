@@ -3,6 +3,14 @@ agenda
 
 Aplikasi berbasiskan framework Laravel yang dibuat sesuai dengan keperluan administrasi surat masuk-surat keluar pada Seksi di KPP. Akan tetapi, dengan sedikit atau beberapa penyesuaian baik dari segi penggunaan ataupun modifikasi kode aplikasi ini sendiri, bukan tidak mungkin dapat digunakan di instansi lain.
 
+cara install
+============
+Cara install beserta konfigurasinya dapat dilihat di video tutorial berikut (88MB):
+https://dl.dropboxusercontent.com/u/26615548/work/cara-install-apps-agenda-surat.wmv
+
+
+>>>> CATATAN SEBELUMNYA: FIXME!! <<<
+
 Cara update singkat (safe):
 * Rename folder aplikasi Agenda Surat yang lama
 * Extract dan tempatkan folder aplikasi Agenda Surat yang baru ini dengan nama yang sama sebelumnya
