@@ -4,10 +4,20 @@ class Suratkeluar extends Eloquent {
 	public static $table = 'surat_keluar';
 
 	/**
-	 * Rules untuk create dan update surat keluar.
+	 * Rules untuk create surat keluar.
 	 */
 	public static $rules = array(
 		'jenis'=>'required',
+		'hal'=>'required',
+		'tanggal'=>'required|date_format:d/m/Y',
+		'pengirim'=>'required',
+		'tujuan'=>'required',
+	);
+
+	/**
+	 * Rules untuk update surat keluar.
+	 */
+	public static $rules_update = array(
 		'hal'=>'required',
 		'tanggal'=>'required|date_format:d/m/Y',
 		'pengirim'=>'required',
@@ -37,6 +47,13 @@ class Suratkeluar extends Eloquent {
 	 */
 	public static function validate($data) {
 		return Validator::make($data, static::$rules);
+	}
+
+	/**
+	 * Validate input untuk update.
+	 */
+	public static function validate_update($data) {
+		return Validator::make($data, static::$rules_update);
 	}
 
 	/**

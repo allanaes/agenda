@@ -125,7 +125,7 @@ class Suratkeluars_Controller extends Base_Controller {
 		$id = Input::get('id');
 
 		// validasi input apakah sesuai rules (cek di model "suratkeluar")
-		$validation = Suratkeluar::validate(Input::all());
+		$validation = Suratkeluar::validate_update(Input::all());
 
 		if ($validation->fails()) {
 			return Redirect::to_route('edit_suratkeluar', $id)->with_errors($validation);

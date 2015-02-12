@@ -261,3 +261,8 @@ php artisan migrate
 *   misal nomor surat yang dibuat menggunakan nomor sekre.
 * - Surat Keluar Massal diganti menggunakan metode import daftar dari yang sebelumnya
 *   menginputkan daftarnya di text area.
+
+/********************************************************************************/
+* Date: [11/02/2015]
+* Fix: Edit Surat Keluar error karena Jenis Surat didisable pada input form sehingga
+*      dianggap tidak diisi.
