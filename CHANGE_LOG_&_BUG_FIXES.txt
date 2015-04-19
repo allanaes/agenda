@@ -266,3 +266,8 @@ php artisan migrate
 * Date: [11/02/2015]
 * Fix: Edit Surat Keluar error karena Jenis Surat didisable pada input form sehingga
 *      dianggap tidak diisi.
+
+/********************************************************************************/
+* Date: [19/04/2015]
+* Fix: Various bug fixes
+* Changes: Penambahan field User perekam dan pengupdate Surat Masuk dsb.
