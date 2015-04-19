@@ -15,6 +15,7 @@
 				<tr><th>Hal:</th><td> {{ e($suratkeluar->hal) }}</td>
 				<tr><th>Pengirim:</th><td> {{ e($suratkeluar->pengirim) }}</td>
 				<tr><th>Perekam:</th><td> {{ e($suratkeluar->perekam) }}</td>
+				<tr><th>Diupdate:</th><td> {{ e($suratkeluar->diupdate) }}</td>
 				<tr><th>Tanggal Rekam:</th><td> {{ $suratkeluar->created_at }}</td>
 				<tr><th>Tanggal Update:</th><td> {{ $suratkeluar->updated_at }}</td>
 			</table>

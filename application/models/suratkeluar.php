@@ -156,7 +156,8 @@ class Suratkeluar extends Eloquent {
 			'pengirim' => $pengirim->nama,
 			'tujuan' => $tujuan,
 			'hal' => $hal,
-			'perekam' => Auth::user()->username
+			'perekam' => Auth::user()->username,
+			'diupdate' => Auth::user()->username
 		));
 
 		// menyimpan old input untuk memudahkan penginputan surat keluar sejenis berikutnya
@@ -365,6 +366,8 @@ class Suratkeluar extends Eloquent {
 	* (didisable untuk diedit), tetapi menggunakan value dari record asalnya.
 	*/
 	public static function update_surat($id) {
+		/* catatan: record 'perekam' tidak dilakukan update untuk membedakan
+		   user yang membuat dan yang mengubah */
 		Suratkeluar::update($id, array(
 			'jenis_surat' => Suratkeluar::find($id)->jenis_surat,
 			'nomor_urut' => Suratkeluar::find($id)->nomor_urut,
@@ -374,7 +377,7 @@ class Suratkeluar extends Eloquent {
 			'pengirim' => Disposisi::find(Input::get('pengirim'))->nama,
 			'tujuan' => Input::get('tujuan'),
 			'hal' => Input::get('hal'),
-			'perekam' => Auth::user()->username
+			'diupdate' => Auth::user()->username
 		));
 	}
 
@@ -693,7 +696,8 @@ class Suratkeluar extends Eloquent {
 						'pengirim' => $pengirim->nama,
 						'tujuan' => $tujuan,
 						'hal' => $hal,
-						'perekam' => Auth::user()->username
+						'perekam' => Auth::user()->username,
+						'diupdate' => Auth::user()->username
 					));
 
 					$jumlah++;
