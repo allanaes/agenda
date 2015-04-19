@@ -88,6 +88,8 @@
 				</td>
 			</tr>
 			<tr><th>Copy:</th><td> {{ e($suratmasuk->copy) }}</td>
+			<tr><th>Perekam:</th><td> {{ e($suratmasuk->perekam) }}</td>
+			<tr><th>Diupdate:</th><td> {{ e($suratmasuk->diupdate) }}</td>
 			<tr><th>Catatan:</th><td> {{ e($suratmasuk->catatan) }}</td>
 			<tr><th>Tahun Buku Agenda:</th><td> {{ e($suratmasuk->tahun_buku) }}</td>
 			<tr><th>Tanggal Rekam:</th><td> {{ $suratmasuk->created_at }}</td>

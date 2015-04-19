@@ -84,6 +84,9 @@ class Suratmasuk extends Eloquent {
 		// apabila terjadi perubahan tahun buku)
 		$input['tahun_buku'] = Konfigurasi::find(4)->config_value;
 
+		// #2.2 record username perekam
+		$input['perekam'] = Auth::user()->username;
+
 		// #3 hapus csrf_token dari input array, agar tidak dimasukkan ke database
 		//unset($input['csrf_token']);
 		Suratmasuk::clean_input($input);
@@ -111,6 +114,9 @@ class Suratmasuk extends Eloquent {
 		// #2 retrieve nomor_agenda_seksi langsung, tidak menggunakan input form
 		// karena di form didisable dan valuenya tidak diteruskan ke POST
 		$input['nomor_agenda_seksi'] = Suratmasuk::find($input['id'])->nomor_agenda_seksi;
+
+		// #2.1 rekam nama user pengupdate
+		$input['diupdate'] = Auth::user()->username;
 
 		// #3 hapus csrf_token dari input array, agar tidak dimasukkan ke database
 		// unset($input['csrf_token']) dll.
@@ -266,6 +272,8 @@ class Suratmasuk extends Eloquent {
 			'sifat',
 			'petunjuk',
 			'copy',
+			'perekam',
+			'diupdate',
 			'catatan',
 			'tahun_buku'
 		);
