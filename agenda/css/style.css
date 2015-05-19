@@ -96,6 +96,10 @@ a:visited:hover {
 	color: #0A4466;
 }
 
+a:active, a:visited:hover {
+	border: 1px dotted #C8C8C8;
+}
+
 .text-red {
 	color: #A80F22;
 	font-weight: bold;
