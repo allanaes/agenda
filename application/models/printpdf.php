@@ -448,8 +448,9 @@ class Printpdf {
 		$files = scandir($folder_path);
 
 		// unset current and parent directory
-		unset($files[0]);
-		unset($files[1]);
+		unset($files[0]); // exclude current folder / .
+		unset($files[1]); // exclude parent folder / ..
+		unset($files[2]); // exclude git ignore
 
 		// menghapus semua file pdf dalam folder tersebut
 		foreach ($files as $key => $fname) {
