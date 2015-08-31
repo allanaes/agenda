@@ -3,20 +3,41 @@ agenda
 
 Aplikasi berbasiskan framework Laravel yang dibuat sesuai dengan keperluan administrasi surat masuk-surat keluar pada Seksi di KPP. Akan tetapi, dengan sedikit atau beberapa penyesuaian baik dari segi penggunaan ataupun modifikasi kode aplikasi ini sendiri, bukan tidak mungkin dapat digunakan di instansi lain.
 
-cara install
-============
++++ Screenshot Aplikasi sebagai gambaran:
+https://dl.dropboxusercontent.com/u/26615548/work/AgendaSurat_Screenshot_2015.08.rar
+
+CARA INSTALL
+=====================
 Cara install beserta konfigurasinya dapat dilihat di video tutorial berikut (88MB):
 https://dl.dropboxusercontent.com/u/26615548/work/cara-install-apps-agenda-surat.wmv
 
-cara update
-===========
+CARA UPDATE
+=====================
 Cara update paket aplikasinya, berikut video tutorialnya untuk mengupdate paket aplikasi
 ke yang versi terbaru (15 MB):
 https://dl.dropboxusercontent.com/u/26615548/work/cara-update-apps-agenda-surat.wmv
 
+PENTING !!!
+=====================
+>>>> #1 <<<<
+PENTING: Enable modul rewrite pada Apache, buka file httpd.conf (jika menggunakan WAMP, klik icon W pada systray -> Apache -> httpd.conf), ubah baris:
 
->>>> CATATAN SEBELUMNYA: FIXME!! <<<
+#LoadModule rewrite_module modules/mod_rewrite.so
 
+uncomment dengan menghapus tanda pagar menjadi:
+
+LoadModule rewrite_module modules/mod_rewrite.so
+
+>>>> #2 <<<<
+Extension fileinfo pada PHP harus di-enable untuk dapat memanfaatkan fitur import daftar surat.
+Pada Windows:
+extension=php_fileinfo.dll
+
+atau pada GNU/Linux:
+extension=fileinfo.so
+
+TIPS !!!
+=====================
 Cara update singkat (safe):
 * Rename folder aplikasi Agenda Surat yang lama
 * Extract dan tempatkan folder aplikasi Agenda Surat yang baru ini dengan nama yang sama sebelumnya
@@ -25,44 +46,9 @@ Cara update singkat (safe):
 
 Command "php" bisa dijalankan dari command prompt jika sudah masuk dalam Path sistem. Kalau belum, masukan pathnya manual, misal: D:\wamp\bin\php\php5.4.3\php.exe artisan migrate
 
-P-E-R-H-A-T-I-A-N-!-!
-=====================
-Extension fileinfo pada PHP harus di-enable untuk dapat memanfaatkan fitur import daftar surat.
-Pada Windows:
-extension=php_fileinfo.dll
-
-atau pada GNU/Linux:
-extension=fileinfo.so
-
-=======
-Aplikasi Agenda Surat Web:
-Download atau clone repo ini.
-
-Cara Install:
-https://dl.dropboxusercontent.com/u/26615548/work/agenda_install.htm
-
-Cara Update:
-https://dl.dropboxusercontent.com/u/26615548/work/agenda_update.htm
-
-Screenshotnya (jadul, yang baru ada beberapa tambahan fitur):
-https://dl.dropboxusercontent.com/u/26615548/work/screenshots_appagenda.rar
-
-Video Tutorial cara installnya kalo bingung yang petunjuk textnya:
-**petunjuk text belum ditambahkan
-https://dl.dropboxusercontent.com/u/26615548/work/agenda-surat-installguide.mp4
-
-Cara Update Aplikasinya barangkali ke depan ada update baru:
-https://dl.dropboxusercontent.com/u/26615548/work/tutorial_cara_update.avi
-
-Setting biar WAMP-nya bisa diakses dari PC lain:
-https://dl.dropboxusercontent.com/u/26615548/work/tutorial-akses-wamp-dari-pc-lain.rar
-
-
-Rekomendasi cara mempelajarinya:
-- Tonton screencastnya sampe selesai (jangan ngapa-ngapain dulu)
-- Kalo udah, ikuti step-by-step, kalo kecepetan pause aja videonya.
-
-Screencast Tutorial Laravel Framework:
-http://www.youtube.com/playlist?list=PL09BB956FCFB5C5FD
-
 Semoga bermanfaat.
+
+=====================
+Laravel Framework:
+http://laravel.com/
+
