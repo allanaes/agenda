@@ -1,6 +1,6 @@
 <?php
 
-class Alter_Table_Suratmasuk {
+class Alter_Table_Suratmasuk2 {
 
 	/**
 	 * Make changes to the database.
