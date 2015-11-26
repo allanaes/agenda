@@ -182,20 +182,38 @@ class Suratmasuk extends Eloquent {
 	public static function search_surat($input) {
 		$limit = ($input['limit'] > 0) ? ceil($input['limit']) : Konfigurasi::find(7)->config_value;
 
-		$id_between = Suratmasuk::get_id_between($input);
-	
-		$sm = Suratmasuk::order_by('id', $input['sort_order'])
-			->where('nomor_agenda_seksi', 'LIKE', '%' . $input['nomor_agenda_seksi'] . '%')
-			->where('tgl_diterima', 'LIKE', '%' . $input['tgl_diterima'] . '%')
-			->where('nomor_agenda_sekre', 'LIKE', '%' . $input['nomor_agenda_sekre'] . '%')
-			->where('nomor_surat', 'LIKE', '%' . $input['nomor_surat'] . '%')
-			->where('tgl_surat', 'LIKE', '%' . $input['tgl_surat'] . '%')
-			->where('pengirim', 'LIKE', '%' . $input['pengirim'] . '%')
-			->where('hal', 'LIKE', '%' . $input['hal'] . '%')
-			->where('disposisi', 'LIKE', '%' . $input['disposisi'] . '%')
-			->where('lain_lain', 'LIKE', '%' . $input['lain_lain'] . '%')
-			->where_in('id', $id_between)
-			->paginate($limit);
+		// Mengingat keterbatasan query, maka dibedakan menjadi dua query untuk search surat,
+		// apabila user memfilter datar menggunakan field id_start atw id_end
+		// maka akan dilimit hanya 1000 list saja.
+		// Jika kosong, maka akan full.
+		if (empty($input['id_start']) && empty($input['id_end'])) {
+			$sm = Suratmasuk::order_by('id', $input['sort_order'])
+				->where('nomor_agenda_seksi', 'LIKE', '%' . $input['nomor_agenda_seksi'] . '%')
+				->where('tgl_diterima', 'LIKE', '%' . $input['tgl_diterima'] . '%')
+				->where('nomor_agenda_sekre', 'LIKE', '%' . $input['nomor_agenda_sekre'] . '%')
+				->where('nomor_surat', 'LIKE', '%' . $input['nomor_surat'] . '%')
+				->where('tgl_surat', 'LIKE', '%' . $input['tgl_surat'] . '%')
+				->where('pengirim', 'LIKE', '%' . $input['pengirim'] . '%')
+				->where('hal', 'LIKE', '%' . $input['hal'] . '%')
+				->where('disposisi', 'LIKE', '%' . $input['disposisi'] . '%')
+				->where('lain_lain', 'LIKE', '%' . $input['lain_lain'] . '%')
+				->paginate($limit);
+		} else {
+			$id_between = Suratmasuk::get_id_between($input);
+
+			$sm = Suratmasuk::order_by('id', $input['sort_order'])
+				->where('nomor_agenda_seksi', 'LIKE', '%' . $input['nomor_agenda_seksi'] . '%')
+				->where('tgl_diterima', 'LIKE', '%' . $input['tgl_diterima'] . '%')
+				->where('nomor_agenda_sekre', 'LIKE', '%' . $input['nomor_agenda_sekre'] . '%')
+				->where('nomor_surat', 'LIKE', '%' . $input['nomor_surat'] . '%')
+				->where('tgl_surat', 'LIKE', '%' . $input['tgl_surat'] . '%')
+				->where('pengirim', 'LIKE', '%' . $input['pengirim'] . '%')
+				->where('hal', 'LIKE', '%' . $input['hal'] . '%')
+				->where('disposisi', 'LIKE', '%' . $input['disposisi'] . '%')
+				->where('lain_lain', 'LIKE', '%' . $input['lain_lain'] . '%')
+				->where_in('id', $id_between)
+				->paginate($limit);
+		}
 
 		// bind data lain
 		$sm->daftar_disposisi = Disposisi::get();
@@ -375,19 +393,15 @@ class Suratmasuk extends Eloquent {
 	 * digunakan untuk membuat query where_in().
 	 */
 	public static function get_id_between($input) {
-		// fecth id dari database ke array
-		$fetch_id = Suratmasuk::get();
-		$id_array = array();
-
-		$i = 0;
-		foreach ($fetch_id as $row) {
-			$id_array[$i] = $row->id;
-			$i++;
-		}
 
 		// min and max id dalam database
 		$min_id = Suratmasuk::min('id');
 		$max_id = Suratmasuk::max('id');
+
+		// membatasi range id
+		if (($max_id - $min_id) >= 1000) {
+			$min_id = $max_id - 1000;
+		}
 
 		// clean id_start
 		# clean dalam hal input kosong atau lebih rendah dari min_id
@@ -401,29 +415,7 @@ class Suratmasuk extends Eloquent {
 		# clean dalam hal input lebih rendah dari id_start
 		$id_end = ($id_end <= $id_start) ? $id_start : $id_end;
 
-		// get start key dan end key dalam id_array
-		$key_start = array_keys($id_array, $id_start);
-		$key_end = array_keys($id_array, $id_end);
-		
-		// kalau belum ada record surat masuk, set array berikut ke default value
-		if (empty($key_start)) {
-			$key_start[0] = 1;
-		}
-		if (empty($key_end)) {
-			$key_end[0] = 1;
-		}
-		if (empty($id_array)) {
-			$id_array[1] = '';
-		}
-
-		// collect id yang dicari
-		$collected_id = array();
-
-		$j = 0;
-		for ($i=$key_start[0]; $i <= $key_end[0]; $i++) { 
-			$collected_id[$j] = $id_array[$i];
-			$j++;
-		}
+		$collected_id = range($id_start, $id_end);
 
 		// return array collected id
 		return $collected_id;

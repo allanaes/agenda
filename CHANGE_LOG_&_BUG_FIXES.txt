@@ -271,3 +271,11 @@ php artisan migrate
 * Date: [19/04/2015]
 * Fix: Various bug fixes
 * Changes: Penambahan field User perekam dan pengupdate Surat Masuk dsb.
+
+/********************************************************************************/
+* Date: [26/11/2015]
+* *****************CRITICAL BUG **** FIXED [26/11/2015]****:
+* Apabila Surat Masuk sudah mencapai jumlah tertentu, maka akan terjadi
+* permasalahan query/koneksi saat pencarian Surat Masuk.
+* Dilakukan penulisan ulang kode dan pembatasan apabila menggunakan filter
+* id untuk pencarian Surat Masuk.
