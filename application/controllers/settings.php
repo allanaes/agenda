@@ -80,6 +80,10 @@ class Settings_Controller extends Base_Controller {
 		Liberation::liberation_suratkeluarlain();
 	}
 
+	public function get_liberation_suratmasukaktivitas() {
+		Liberation::liberation_suratmasukaktivitas();
+	}
+
 	public function post_disposisi_add() {
 		$input = Input::all();
 		$validation = Disposisi::validate($input);

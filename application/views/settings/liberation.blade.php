@@ -48,4 +48,9 @@
 		<h4>Download Data Surat Keluar Lain</h4>
 		<p class="indented"><i class="icon-download"></i> {{ HTML::link_to_route('settings_liberation_suratkeluarlain', 'Download .CSV') }}</p>
 	</div>
+
+	<div class="row">
+		<h4>Download Data Aktivitas Surat Masuk</h4>
+		<p class="indented"><i class="icon-download"></i> {{ HTML::link_to_route('settings_liberation_suratmasukaktivitas', 'Download .CSV') }}</p>
+	</div>
 @endsection

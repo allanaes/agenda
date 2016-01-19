@@ -205,4 +205,61 @@ class Liberation extends Eloquent {
 			fputcsv($output, $row, ';');
 		}
 	}
+
+	/**
+	 * Mengquery database aktivitas surat masuk dan mengoutputkannya ke file CSV.
+	 */
+	public static function liberation_suratmasukaktivitas() {
+		// output headers so that the file is downloaded rather than displayed
+		$filename = 'data_suratmasukaktivitas_' . date('Y') . '_' . date('m') . '_' . date('d') .
+			'_' . date('H') . date('i') . date('s');
+
+		header('Content-Type: text/csv; charset=utf-8');
+		header("Content-disposition: attachment; filename=$filename.csv");
+		
+
+		// create a file pointer connected to the output stream
+		$output = fopen('php://output', 'w');
+		
+		// fetch data surat masuk
+		$db = Suratmasukaktivitas::get();
+		
+		// output the column headings
+		$headings = array(
+			'id',
+			'id_surat_masuk',
+			'pic',
+			'aktivitas',
+			'tgl_aktivitas',
+			'tgl_jatuh_tempo',
+			'proses',
+			'perekam',
+			'diupdate',
+			'created_at',
+			'updated_at'
+		);
+
+		// output dulu headingnya
+		fputcsv($output, $headings, ';');
+
+		// loop over the rows, outputting them
+		foreach($db as $record) {
+			$row = array(
+				$record->id,
+				$record->id_surat_masuk,
+				$record->pic,
+				$record->aktivitas,
+				$record->tgl_aktivitas,
+				$record->tgl_jatuh_tempo,
+				$record->proses,
+				$record->perekam,
+				$record->diupdate,
+				$record->created_at,
+				$record->updated_at				
+			);
+
+			// output row per surat
+			fputcsv($output, $row, ';');
+		}
+	}
 }

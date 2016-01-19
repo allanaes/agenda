@@ -132,6 +132,7 @@ Route::get('settings/liberation', array('before'=>'auth','before' => 'is_admin',
 Route::get('settings/liberation/suratmasuk', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratmasuk', 'uses'=>'settings@liberation_suratmasuk'));
 Route::get('settings/liberation/suratkeluar', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratkeluar', 'uses'=>'settings@liberation_suratkeluar'));
 Route::get('settings/liberation/suratkeluarlain', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratkeluarlain', 'uses'=>'settings@liberation_suratkeluarlain'));
+Route::get('settings/liberation/suratmasukaktivitas', array('before'=>'auth','before' => 'is_admin', 'as'=>'settings_liberation_suratmasukaktivitas', 'uses'=>'settings@liberation_suratmasukaktivitas'));
 
 // Route untuk reset profile untuk semua tipe user
 Route::post('settings/user/reset', array('before'=>'auth', 'before'=>'csrf', 'uses'=>'settings@user_reset'));

@@ -28,6 +28,7 @@
   background: #2b2f3a;
   width: 100%;
   z-index: 500;
+  height: 95%;
 }
 #cssmenu:after,
 #cssmenu > ul:after {
