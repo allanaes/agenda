@@ -2,7 +2,16 @@
 
 @section('content')
 	<div class='row'>
-			<h1>Pengawasan Surat: #{{ $suratmasuk->id }}</h1>
+			<h1>Aktivitas Surat: #{{ $suratmasuk->id }}</h1>
+	</div>
+
+	<div class="row">
+		<ul class="breadcrumb">
+			<li>
+				{{ HTML::link_to_route('suratmasuk', 'Surat Masuk')}} <span class="divider">/</span>
+			</li>
+			<li class="active">Aktivitas Surat Masuk</li>
+		</ul>
 	</div>
 
 	@include('layouts.alert_msg')
