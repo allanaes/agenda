@@ -56,7 +56,7 @@
 					<td>{{ e($suratkeluarlain->tujuan) }}</td>
 					<td>{{ e($suratkeluarlain->hal) }}</td>
 					<td>{{ e($suratkeluarlain->pengirim) }}</td>
-					<td>{{ HTML::link_to_route('suratkeluarlain', 'Detail', array($suratkeluarlain->id)) }}</td>
+					<td class="align-right">{{ HTML::decode(HTML::link_to_route('suratkeluarlain', '<i class="icon-info-sign"></i>', array($suratkeluarlain->id), array("class"=>"urlbtn", "title"=>"Lihat Detail Surat"))) }}</td>
 				</tr>
 			@endforeach
 

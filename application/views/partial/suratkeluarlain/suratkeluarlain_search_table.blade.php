@@ -42,7 +42,7 @@
 					$date_created = date_create_from_format('Y-m-d', substr($suratkeluarlain->created_at, 0, 10))->getTimestamp();
 					$created = date('d M Y', $date_created);
 					if ($created != $prev_date) {
-						echo '<tr> <td colspan="7"><h5>&nbsp;' . $created .'</h5></td></tr>';
+						echo '<tr> <td colspan="7"><h6>&nbsp;' . $created .'</h6></td></tr>';
 						$prev_date = $created;
 					} else {
 						$prev_date = $created;
@@ -59,11 +59,11 @@
 					<td>{{ e($suratkeluarlain->tujuan) }}</td>
 					<td>{{ e($suratkeluarlain->hal) }}</td>
 					<td>{{ e($suratkeluarlain->pengirim) }}</td>
-					<td>{{ HTML::link_to_route('suratkeluarlain', 'Detail', array($suratkeluarlain->id)) }}
-					@if (User::is_user_allowed())
-					 	<span class="divider">|</span> 
-						{{ HTML::link_to_route('edit_suratkeluarlain', 'Edit', array($suratkeluarlain->id)) }}</td>
-					@endif
+					<td class="align-right">{{ HTML::decode(HTML::link_to_route('suratkeluarlain', '<i class="icon-info-sign"></i>', array($suratkeluarlain->id), array("class"=>"urlbtn", "title"=>"Lihat Detail Surat"))) }}
+						@if (User::is_user_allowed())
+							{{ HTML::decode(HTML::link_to_route('edit_suratkeluarlain', '<i class="icon-edit"></i>', array($suratkeluarlain->id), array("class"=>"urlbtn", "title"=>"Edit Surat"))) }}
+						@endif
+					</td>
 				</tr>
 			@endforeach
 

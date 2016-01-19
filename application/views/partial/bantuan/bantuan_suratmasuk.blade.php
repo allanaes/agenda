@@ -78,6 +78,13 @@
 			dimulai ulang pada saat pergantian konfigurasi tahun, sementara 'ID' akan
 			terus incremental.  			
 		</p>
+
+		<h3>Pengawasan Surat Masuk</h3>
+		<p>Pengawasan Surat Masuk digunakan untuk membantu pengguna menandai Surat Masuk dan mencatat setiap aktivitas
+			yang dilakukan terkait surat tersebut. Menu ini merupakan koleksi dari sejumlah surat masuk yang telah diberikan
+			catatan aktivitasnya. Untuk menambahkan catatan/aktivitas pada surat masuk, bisa menggunakan link Aktivitas
+			yang ada pada setiap list surat masuk.
+		</p>
 	</div>
 </div>
 

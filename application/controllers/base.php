@@ -8,9 +8,11 @@ class Base_Controller extends Controller {
 		Asset::add('jqueryui', 'css/jquery-ui.min.css');
 		Asset::add('jqueryui_structure', 'css/jquery-ui.structure.min.css');
 		Asset::add('jqueryui_theme', 'css/jquery-ui.theme.min.css');
+		Asset::add('cssmenu', 'css/cssmenu.css');
 		Asset::add('jquery', 'js/jquery.min.js');
 		Asset::add('jquery_ui', 'js/jquery-ui.min.js');
 		Asset::add('jshelper', 'js/jshelper.js');
+		Asset::add('cssmenu', 'js/cssmenu.js');
 		parent::__construct();
 	}
 	/**

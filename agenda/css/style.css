@@ -237,7 +237,7 @@ input.disabled {
 /* end form styling */
 
 /*** start header styling */
-h1, h2, h5, h6 {
+h1, h2, h3, h5, h6 {
 	color: #EB3C00;
 	font-family: "Segoe UI Light", "Open Sans Light", Tahoma, Verdana, Arial, sans-serif;
 	font-weight: normal;
@@ -262,6 +262,12 @@ h5, h6 {
 h6 {
 	margin-top: 0px;
 	font-size: 1.3em;
+}
+
+h3 {
+	margin-bottom: 0px;
+	font-size: 1.7em;
+	border: 0;
 }
 
 h4 {
@@ -353,31 +359,19 @@ button.alt:hover {
 }
 /* end button styling */
 
-a.urlbtn-green {
-	background-color: #5DAA6B;
-	font-size: 13px;
-	border: 1px solid #297E39;
-	border-bottom: 1px solid #1A6E2A;
-	box-shadow: 0 1px #8AC294 inset;
+a.urlbtn {
+	background-color: #f6f6f6;
+	border: 1px solid #777;
 	color: white;
-	padding: 1px 5px;
-	text-shadow: 0 -1px 0 #297E39;
-	font: inherit;
-	*margin-right: 2px;
+	padding: 2px;
 	cursor: pointer;
-	float: left;
-	clear: both;
+	border-radius: 2px;
 }
 
-a.urlbtn-green:hover {
-	background-color: #7FBC8B;
-	box-shadow: 0 1px #ACD4B5 inset;
+a.urlbtn:hover {
+	background-color: #bbb;
 }
 
-a.urlbtn-green:active {
-	background-color: #37693E;
-	box-shadow: 0 1px #4E9658 inset;
-}
 
 /*** start table styling */
 table {
@@ -472,14 +466,14 @@ th {
 }
 /* end table styling */
 
-/*** start navigation bar styling */
+/*** start navigation bar styling 
 .navbar {
 	background-color: #262626;
 	display: inline-block;
 	float: left;
 	min-width: 960px;
 	width: 100%;
-	min-height: 36px;
+	height: 36px;
 	margin: 0;
 	margin-bottom: 24px;
 	position: fixed;
@@ -495,11 +489,12 @@ th {
 	padding: 8px;
 	padding-right: 20px;
 }
+*/
 
 /* webkit only to align input form */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.navbar .control {
-		padding-top: 10px;
+		padding-top: 11px;
 		padding-bottom: 10px;
 	}
 }
@@ -514,7 +509,7 @@ th {
 	outline: none;
 	text-decoration: none;
 	vertical-align: middle;
-	padding: 11px 8px 10px 8px;
+	padding: 13px 8px 10px 8px;
 	height: 36px;
 	margin: 0;
 }
@@ -530,6 +525,8 @@ th {
 
 .header-img {
 	height: 36px;
+	margin: 0;
+	padding: 0;
 }
 
 @media only screen and (max-width: 1130px) {
@@ -588,6 +585,18 @@ textarea.span6 {
 
 .span7 {
 	width: 460px;
+}
+
+.span8 {
+	width: 500px;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.align-center {
+	text-align: center;
 }
 /* end width class */
 
@@ -697,6 +706,12 @@ textarea.span6 {
 .alert-info {
 	
 	color: #000;
+}
+
+.narrow-vspace {
+	margin: 0;
+	border: 0;
+	border-top: 1px solid #D2D2D2;
 }
 
 /* end alert styling */

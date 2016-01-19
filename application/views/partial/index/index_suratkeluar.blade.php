@@ -9,7 +9,11 @@
 					<th class="span3">Tujuan</th>
 					<th>Hal</th>
 					<th>Pengirim</th>
-					<th class="span1">Ket.</th>
+					@if (User::is_user_allowed())
+						<th class="span1_5">Ket.</th>
+					@else
+						<th class="span1_5">Ket.</th>
+					@endif
 				</tr>
 			</thead>
 			<tbody>
@@ -33,7 +37,9 @@
 					<td>{{ e($suratkeluar->tujuan) }}</td>
 					<td>{{ e($suratkeluar->hal) }}</td>
 					<td>{{ e($suratkeluar->pengirim) }}</td>
-					<td>{{ HTML::link_to_route('suratkeluar', 'Detail', array($suratkeluar->id)) }}</td>
+					<td class="align-right">
+						{{ HTML::decode(HTML::link_to_route('suratkeluar', '<i class="icon-info-sign"></i>', array($suratkeluar->id), array("class"=>"urlbtn", "title"=>"Lihat Detail Surat"))) }}
+					</td>
 				</tr>
 			@endforeach
 

@@ -12,7 +12,7 @@
 					@if (User::is_user_allowed())
 						<th class="span1_5">Ket.</th>
 					@else
-						<th class="span1">Ket.</th>
+						<th class="span1_5">Ket.</th>
 					@endif
 				</tr>
 			</thead>
@@ -31,10 +31,9 @@
 					<td>{{ e($suratmasuk->tgl_surat) }}</td>
 					<td>{{ e($suratmasuk->pengirim) }}</td>
 					<td>{{ e($suratmasuk->hal) }}</td>
-					<td>{{ HTML::link_to_route('suratmasuk', 'Detail', array($suratmasuk->id)) }}
+					<td class="align-right">{{ HTML::decode(HTML::link_to_route('suratmasuk', '<i class="icon-info-sign"></i>', array($suratmasuk->id), array("class"=>"urlbtn", "title"=>"Lihat Detail Surat"))) }}
 						@if (User::is_user_allowed())
-							<span class="divider">|</span>
-							{{ HTML::link_to_route('disposisi_suratmasuk', 'Print', array($suratmasuk->id)) }}
+							{{ HTML::decode(HTML::link_to_route('disposisi_suratmasuk', '<i class="icon-print"></i>', array($suratmasuk->id), array("class"=>"urlbtn", "title"=>"Cetak Lembar Disposisi"))) }}
 						@endif
 					</td>
 				</tr>

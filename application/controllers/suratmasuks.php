@@ -18,6 +18,50 @@ class Suratmasuks_Controller extends Base_Controller {
 			->with('suratmasuks', $db_surat_masuk);
 	}
 
+	public function get_pengawasan() {
+		$pengawasan_surat = Suratmasukpengawasan::pengawasan_index();
+		$data_pengawasan = Suratmasukpengawasan::data_pengawasan($pengawasan_surat);
+
+		return View::make('suratmasuk.pengawasan')
+			->with('title', 'Agenda Surat :: Pengawasan Surat')
+			->with('data_pengawasan', $data_pengawasan)
+			->with('pengawasan_surat', $pengawasan_surat);
+	}
+
+	public function get_aktivitas($id) {
+		$aktivitas_surat = Suratmasukaktivitas::aktivitas_surat($id);
+
+		if ($aktivitas_surat) {
+			$s = Suratmasukaktivitas::where('id_surat_masuk', '=', $id)->get();
+
+			$msg = isset($message) ? $message : null;
+
+			return View::make('suratmasuk.aktivitas')
+				->with('title', 'Agenda Surat :: Aktivitas Surat')
+				->with('suratmasuk', $aktivitas_surat)
+				->with('message', $msg)
+				->with('aktivitas', $s);
+		} else {
+			// return error 404 apabila mengakses ID surat yg tidak ada di database
+			return View::make('error.404');
+		}
+	}
+
+	public function post_aktivitas_create() {
+		$input = Input::all();
+		$id_surat_masuk = $input["id_surat_masuk"];
+		$validation = Suratmasukaktivitas::validate($input);
+
+		if ($validation->fails()) {
+			return Redirect::to('suratmasuk/' . $id_surat_masuk . '/aktivitas')->with_errors($validation)->with_input();
+		} else {
+			$tambah_aktivitas = Suratmasukaktivitas::aktivitas_create($input);	
+
+			return Redirect::to('suratmasuk/' . $id_surat_masuk . '/aktivitas')->with('message', $tambah_aktivitas);;
+		}
+	}
+
+
 	public function post_create() {
 		$input = Input::all();
 		$validation = Suratmasuk::validate($input);

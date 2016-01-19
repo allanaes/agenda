@@ -34,7 +34,6 @@
 
 	<div class="row morevspace">
 		<table class='displaytable'>
-			<thead>
 				<tr>
 					<th class="span4">Nomor Surat</th>
 					<th class="span1">Tanggal</th>
@@ -43,8 +42,6 @@
 					<th>Pengirim</th>
 					<th class="span1">Ket.</th>
 				</tr>
-			</thead>
-			<tbody>
 			<?php
 				$i = 1; // variabel initial untuk highlight row saat ada item baru diinput
 			 	$j = 0;
@@ -83,7 +80,9 @@
 					<td>{{ e($suratkeluar->tujuan) }}</td>
 					<td>{{ e($suratkeluar->hal) }}</td>
 					<td>{{ e($suratkeluar->pengirim) }}</td>
-					<td>{{ HTML::link_to_route('suratkeluar', 'Detail', array($suratkeluar->id)) }}</td>
+					<td class="align-right">
+						{{ HTML::decode(HTML::link_to_route('suratkeluar', '<i class="icon-info-sign"></i>', array($suratkeluar->id), array("class"=>"urlbtn", "title"=>"Lihat Detail Surat"))) }}
+					</td>
 				</tr>
 			@endforeach
 
@@ -92,7 +91,6 @@
 				 	<td colspan="5"><em>tidak ditemukan record untuk jenis surat tersebut...</em><td>
 				 </tr>
 			@endif		
-			</tbody>
 		</table>
 	</div>
 @endsection

@@ -63,6 +63,12 @@ Route::post('suratmasuk/create', array('before'=>'auth', 'before'=>'is_user', 'b
 Route::get('suratmasuk/(:any?)/edit', array('before'=>'auth', 'before'=>'is_user', 'as'=>'edit_suratmasuk', 'uses'=>'suratmasuks@edit'));
 Route::get('suratmasuk/(:any?)/disposisi', array('before'=>'auth', 'before'=>'is_user', 'as'=>'disposisi_suratmasuk', 'uses'=>'suratmasuks@disposisi'));
 Route::put('suratmasuk/update', array('before'=>'auth', 'before'=>'is_user', 'before'=>'csrf', 'uses'=>'suratmasuks@update'));
+// aktivitas surat masuk 
+Route::get('suratmasuk/(:any?)/aktivitas', array('before'=>'auth', 'before'=>'is_user', 'as'=>'aktivitas_suratmasuk', 'uses'=>'suratmasuks@aktivitas'));
+Route::post('suratmasuk/(:any?)/aktivitas/create', array('before'=>'auth', 'before'=>'is_user', 'as'=>'aktivitas_suratmasuk_create', 'uses'=>'suratmasuks@aktivitas_create'));
+// pengawasan surat masuk
+Route::get('suratmasuk/pengawasan', array('before'=>'auth', 'before'=>'is_user', 'as'=>'pengawasan_suratmasuk', 'uses'=>'suratmasuks@pengawasan'));
+
 // all users, guest ok
 Route::get('suratmasuk/(:any)', array('before'=>'auth', 'as'=>'suratmasuk', 'uses'=>'suratmasuks@view'));
 Route::get('suratmasuk/search', array('before'=>'auth', 'as'=>'search_suratmasuk', 'uses'=>'suratmasuks@search'));

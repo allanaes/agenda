@@ -279,3 +279,9 @@ php artisan migrate
 * permasalahan query/koneksi saat pencarian Surat Masuk.
 * Dilakukan penulisan ulang kode dan pembatasan apabila menggunakan filter
 * id untuk pencarian Surat Masuk.
+
+/********************************************************************************/
+* Date: [17/01/2016]
+* New Features:
+* Modul Pengawasan Surat Masuk
+* To-do: fitur pencarian dan download data pengawasan surat masuk / aktivitasnya.

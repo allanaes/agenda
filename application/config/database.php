@@ -72,7 +72,7 @@ return array(
 			'host'     => 'localhost',
 			'database' => 'agenda_pelayanan',
 			'username' => 'root',
-			'password' => 'allanas',
+			'password' => 'allanaes',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
