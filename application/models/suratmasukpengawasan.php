@@ -39,71 +39,74 @@ class Suratmasukpengawasan extends Eloquent {
 		// fetch daftar id surat masuk dan id aktivitas
 		$array_id_surat_masuk = array();
 
-		foreach ($s->results as $row) {
-			array_push($array_id_surat_masuk, $row->id_surat_masuk);
-		}
+		// inisiasi variabel
+		$data_pengawasan_surat = array();		
 
-		$array_id_aktivitas = array();
-		foreach ($s->results as $row) {
-			array_push($array_id_aktivitas, $row->id_aktivitas);
-		}
+		if ($s->total > 0) {
+			foreach ($s->results as $row) {
+				array_push($array_id_surat_masuk, $row->id_surat_masuk);
+			}
 
-		// querykan sekaligus id-nya
-		$_surat_masuk = Suratmasuk::where_in('id', $array_id_surat_masuk)->get();
-		$_aktivitas = Suratmasukaktivitas::where_in('id', $array_id_aktivitas)->get();
+			$array_id_aktivitas = array();
+			foreach ($s->results as $row) {
+				array_push($array_id_aktivitas, $row->id_aktivitas);
+			}
 
-		// convert object data surat masuk ke array
-		$data_surat_masuk = array();
+			// querykan sekaligus id-nya
+			$_surat_masuk = Suratmasuk::where_in('id', $array_id_surat_masuk)->get();
+			$_aktivitas = Suratmasukaktivitas::where_in('id', $array_id_aktivitas)->get();
 
-		foreach ($_surat_masuk as $row) {
-			$item = array(
-				'nomor_surat' => $row->nomor_surat,
-				'pengirim' => $row->pengirim,
-				'tgl_surat' => $row->tgl_surat,
-				'hal' => $row->hal
-			);
+			// convert object data surat masuk ke array
+			$data_surat_masuk = array();
 
-			$data_surat_masuk[$row->id] = $item;
-		}
-
-		// convert object data aktivitas ke array
-		$data_aktivitas = array();
-
-		foreach ($_aktivitas as $row) {
-			$item = array(
-				'pic' => $row->pic,
-				'aktivitas' => $row->aktivitas,
-				'tgl_aktivitas' => $row->tgl_aktivitas,
-				'tgl_jatuh_tempo' => $row->tgl_jatuh_tempo,
-				'proses' => $row->proses
-			);
-
-			$data_aktivitas[$row->id] = $item;
-		}
-
-		// building data pengawasan surat
-		$data_pengawasan_surat = array();
-
-		foreach ($s->results as $row) {
-			$id_surat_masuk = $row->id_surat_masuk;
-			$id_aktivitas = $row->id_aktivitas;
-
-			$item = array(
-				'id' => $row->id,
-				'id_surat_masuk' => $id_surat_masuk,
-				'id_aktivitas' => $id_aktivitas,
-				'nomor_surat' => $data_surat_masuk[$id_surat_masuk]['nomor_surat'],
-				'pengirim' => $data_surat_masuk[$id_surat_masuk]['pengirim'],
-				'tgl_surat' => $data_surat_masuk[$id_surat_masuk]['tgl_surat'],
-				'hal' => $data_surat_masuk[$id_surat_masuk]['hal'],
-				'pic' => $data_aktivitas[$id_aktivitas]['pic'],
-				'aktivitas' => $data_aktivitas[$id_aktivitas]['aktivitas'],
-				'tgl_aktivitas' => $data_aktivitas[$id_aktivitas]['tgl_aktivitas'],
-				'tgl_jatuh_tempo' => $data_aktivitas[$id_aktivitas]['tgl_jatuh_tempo'],
-				'proses' => $data_aktivitas[$id_aktivitas]['proses'],
+			foreach ($_surat_masuk as $row) {
+				$item = array(
+					'nomor_surat' => $row->nomor_surat,
+					'pengirim' => $row->pengirim,
+					'tgl_surat' => $row->tgl_surat,
+					'hal' => $row->hal
 				);
-			array_push($data_pengawasan_surat, $item);
 
+				$data_surat_masuk[$row->id] = $item;
+			}
+
+			// convert object data aktivitas ke array
+			$data_aktivitas = array();
+
+			foreach ($_aktivitas as $row) {
+				$item = array(
+					'pic' => $row->pic,
+					'aktivitas' => $row->aktivitas,
+					'tgl_aktivitas' => $row->tgl_aktivitas,
+					'tgl_jatuh_tempo' => $row->tgl_jatuh_tempo,
+					'proses' => $row->proses
+				);
+
+				$data_aktivitas[$row->id] = $item;
+			}
+
+			// building data pengawasan surat
+			foreach ($s->results as $row) {
+				$id_surat_masuk = $row->id_surat_masuk;
+				$id_aktivitas = $row->id_aktivitas;
+
+				$item = array(
+					'id' => $row->id,
+					'id_surat_masuk' => $id_surat_masuk,
+					'id_aktivitas' => $id_aktivitas,
+					'nomor_surat' => $data_surat_masuk[$id_surat_masuk]['nomor_surat'],
+					'pengirim' => $data_surat_masuk[$id_surat_masuk]['pengirim'],
+					'tgl_surat' => $data_surat_masuk[$id_surat_masuk]['tgl_surat'],
+					'hal' => $data_surat_masuk[$id_surat_masuk]['hal'],
+					'pic' => $data_aktivitas[$id_aktivitas]['pic'],
+					'aktivitas' => $data_aktivitas[$id_aktivitas]['aktivitas'],
+					'tgl_aktivitas' => $data_aktivitas[$id_aktivitas]['tgl_aktivitas'],
+					'tgl_jatuh_tempo' => $data_aktivitas[$id_aktivitas]['tgl_jatuh_tempo'],
+					'proses' => $data_aktivitas[$id_aktivitas]['proses'],
+					);
+				array_push($data_pengawasan_surat, $item);
+
+			}
 		}
 		
 		// return hasilnya

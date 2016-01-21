@@ -69,13 +69,14 @@ class Suratmasukaktivitas extends Eloquent {
 		));
 
 		// validate untuk update / create record pengawasan
+		$id_aktivitas = Suratmasukaktivitas::where('id_surat_masuk', '=', $id_surat_masuk)->max('id');
+		$input['id_aktivitas'] = $id_aktivitas;
+
 		$validation = Suratmasukpengawasan::validate($input);
 
 		if ($validation->fails()) {
 			return Redirect::to('suratmasuk/' . $id_surat_masuk . '/aktivitas')->with_errors($validation)->with_input();
 		} else {
-			$id_aktivitas = Suratmasukaktivitas::where('id_surat_masuk', '=', $id_surat_masuk)->max('id');
-
 			Suratmasukpengawasan::pengawasan_create($id_surat_masuk, $id_aktivitas);
 
 			$msg = 'Berhasil ditambahkan aktivitas baru untuk ' . $pic . '.';
