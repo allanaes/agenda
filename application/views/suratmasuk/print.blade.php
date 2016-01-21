@@ -5,7 +5,9 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th class="span2">NO. AGENDA SEKRE</th>
+				@if (Konfigurasi::find(10)->config_value != 1)
+					<th class="span2">NO. AGENDA SEKRE</th>
+				@endif
 				<th>NOMOR SURAT</th>
 				<th>TANGGAL</th>
 				<th>PERIHAL</th>
@@ -88,7 +90,9 @@ foreach ($daftar_disposisi as $disposisi_key => $nama) {
 				echo '<td class="input-small">' . $record['nomor_agenda_seksi'] . '</td>';
 			}
 			
-			echo '<td>' . $record['nomor_agenda_sekre'] . '</td>';
+			if (Konfigurasi::find(10)->config_value != 1) {
+				echo '<td>' . $record['nomor_agenda_sekre'] . '</td>';
+			}
 			echo '<td class="span3_5">' . $record['nomor_surat'] . '</td>';
 			echo '<td class="centered">' . $record['tgl_surat'] . '</td>';
 			echo '<td>' . $record['hal'] . '</td>';

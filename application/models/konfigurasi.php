@@ -35,6 +35,7 @@ class Konfigurasi extends Eloquent {
 		Konfigurasi::update(6, array('config_value'=>$input['jumlah_baris_surat_keluar']));
 		Konfigurasi::update(7, array('config_value'=>$input['jumlah_baris_pencarian_surat']));
 		Konfigurasi::update(8, array('config_value'=>$input['tampilkan_nomor_agenda']));
+		Konfigurasi::update(10, array('config_value'=>$input['is_sekre']));
 
 		// rules untuk konfigurasi tahun agar tidak mengacaukan pengurutan nomor
 		$max_tahun_used = Suratkeluar::max('tahun');

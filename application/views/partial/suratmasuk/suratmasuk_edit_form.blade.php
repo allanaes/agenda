@@ -18,13 +18,18 @@
 
 					<tr>
 						<td class="field">
-							{{ Form::label('nomor_agenda_seksi', '* Nomor Agenda Seksi:') }} 
+							@if (Konfigurasi::find(10)->config_value != 1)
+								{{ Form::label('nomor_agenda_seksi', '* Nomor Agenda Seksi:') }}
+							@else
+								{{ Form::label('nomor_agenda_seksi', '* Nomor Agenda:') }}
+							@endif
 						</td>
 						<td>
 							{{ Form::text('nomor_agenda_seksi', $suratmasuk->nomor_agenda_seksi, array('class'=>'input-small', 'disabled'=>'')) }}
 						</td>
 					</tr>
 
+					@if (Konfigurasi::find(10)->config_value != 1)
 					<tr>
 						<td class="field">
 							{{ Form::label('nomor_agenda_sekre', '* Nomor Agenda Sekre:') }} 
@@ -33,6 +38,9 @@
 							{{ Form::text('nomor_agenda_sekre', $suratmasuk->nomor_agenda_sekre, array('class'=>'span4')) }}
 						</td>
 					</tr>
+					@else
+						{{ Form::hidden('nomor_agenda_sekre', $suratmasuk->nomor_agenda_sekre) }}
+					@endif
 
 					<tr>
 						<td class="field">
