@@ -135,7 +135,7 @@ class Printpdf {
 		$pdf->Cell(10, $h2, '');
 
 		// print jika bukan Sekre --------------------------------------------------
-		$is_sekre = Konfigurasi::find(10)->config_value;
+		$is_sekre = Konfigurasi::find(9)->config_value;
 
 		if ($is_sekre != 1) {
 			// output label right
