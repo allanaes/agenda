@@ -285,3 +285,10 @@ php artisan migrate
 * New Features:
 * Modul Pengawasan Surat Masuk
 * To-do: fitur pencarian dan download data pengawasan surat masuk / aktivitasnya.
+
+/********************************************************************************/
+* Date: [21/01/2016]
+* Add config:
+* Opsi khusus untuk Sekretariat sehingga tidak harus input kolom agenda Sekre
+* karena Sekretariat tidak menggunakannya. Nomor Agenda tetap terekam dalam kolom 
+* Nomor Agenda Seksi. Untuk hal download CSV, tidak ada perubahan.

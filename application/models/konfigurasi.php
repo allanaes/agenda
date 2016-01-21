@@ -66,7 +66,7 @@ class Konfigurasi extends Eloquent {
 	 * Info versi aplikasi
 	 */
 	public static function versi() {
-		$versi = '0.9.7.20160117';
+		$versi = '0.9.7.20160121';
 
 		return $versi;
 	}
