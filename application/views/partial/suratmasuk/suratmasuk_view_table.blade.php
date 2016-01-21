@@ -46,7 +46,7 @@
 
 		<table class="viewtable">
 			<tr><th class="span3_5">Tanggal Diterima:</th><td> {{ e($suratmasuk->tgl_diterima) }}</td></tr>
-			@if (Konfigurasi::find(10)->config_value != 1)
+			@if (Konfigurasi::find(9)->config_value != 1)
 				<tr><th>Nomor Agenda Seksi:</th><td> {{ e($suratmasuk->nomor_agenda_seksi) }}</td></tr>
 				<tr><th>Nomor Agenda Sekre:</th><td> {{ e($suratmasuk->nomor_agenda_sekre) }}</td></tr>
 			@else

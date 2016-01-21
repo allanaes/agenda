@@ -23,7 +23,7 @@
 
 					<tr>
 						<td class="field">
-							@if (Konfigurasi::find(10)->config_value != 1)
+							@if (Konfigurasi::find(9)->config_value != 1)
 								{{ Form::label('nomor_agenda_seksi', 'Nomor Agenda Seksi:') }}
 							@else
 								{{ Form::label('nomor_agenda_seksi', 'Nomor Agenda:') }}
@@ -34,7 +34,7 @@
 						</td>
 					</tr>
 
-					@if (Konfigurasi::find(10)->config_value != 1)
+					@if (Konfigurasi::find(9)->config_value != 1)
 						<tr>
 							<td class="field">
 								{{ Form::label('nomor_agenda_sekre', 'Nomor Agenda Sekre:') }} 

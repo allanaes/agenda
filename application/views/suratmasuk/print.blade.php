@@ -5,7 +5,7 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				@if (Konfigurasi::find(10)->config_value != 1)
+				@if (Konfigurasi::find(9)->config_value != 1)
 					<th class="span2">NO. AGENDA SEKRE</th>
 				@endif
 				<th>NOMOR SURAT</th>
