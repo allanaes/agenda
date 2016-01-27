@@ -87,6 +87,9 @@ class Suratmasuk extends Eloquent {
 		// #2.2 record username perekam
 		$input['perekam'] = Auth::user()->username;
 
+		// #2.3 record username diupdate
+		$input['diupdate'] = Auth::user()->username;
+
 		// #3 hapus csrf_token dari input array, agar tidak dimasukkan ke database
 		//unset($input['csrf_token']);
 		Suratmasuk::clean_input($input);
