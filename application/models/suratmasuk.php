@@ -8,7 +8,6 @@ class Suratmasuk extends Eloquent {
 	 */
 	public static $rules = array(
 		'tgl_diterima' => 'required|date_format:d/m/Y',
-		'nomor_agenda_sekre' => 'required',
 		'nomor_surat' => 'required',
 		'tgl_surat' => 'required|date_format:d/m/Y',
 		'pengirim' => 'required',
@@ -21,13 +20,14 @@ class Suratmasuk extends Eloquent {
 	 */
 	public static $rules_alt = array(
 		'tgl_diterima' => 'required|date_format:d/m/Y',
-		'nomor_agenda_sekre' => 'required',
 		'nomor_surat' => 'required',
 		'tgl_surat' => 'required|date_format:d/m/Y',
 		'pengirim' => 'required',
 		'hal' => 'required',
 		'copy' => 'integer|min:0|max:99'
 	);
+
+
 
 	/**
 	 * Validate input untuk create.
@@ -60,6 +60,7 @@ class Suratmasuk extends Eloquent {
 
 			// bind data lain
 			$sm->nomor_agenda_seksi = Suratmasuk::generate_nomor_agenda_seksi();
+			$sm->nomor_agenda_sekre = Suratmasuk::generate_nomor_agenda_sekre();
 			$sm->daftar_disposisi = Disposisi::get();
 			$sm->daftar_petunjuk = Petunjuk::get();
 			$sm->daftar_sifat = Suratmasuk::daftar_sifat();
@@ -79,6 +80,12 @@ class Suratmasuk extends Eloquent {
 		// #2 retrieve nomor_agenda_seksi langsung, tidak menggunakan input form
 		// karena di form didisable dan valuenya tidak diteruskan ke POST
 		$input['nomor_agenda_seksi'] = Suratmasuk::generate_nomor_agenda_seksi();
+
+		// #2.0 khusus untuk Sekre, nomor agenda akan digenerate karena pada
+		// input form didisable / hanya view
+		if (Konfigurasi::find(9)->config_value == 1) {
+			$input['nomor_agenda_sekre'] = Suratmasuk::generate_nomor_agenda_sekre();
+		}
 
 		// #2.1 retrieve tahun buku pembuatan agenda (berfungsi untuk reset nomor agenda
 		// apabila terjadi perubahan tahun buku)
@@ -117,6 +124,10 @@ class Suratmasuk extends Eloquent {
 		// #2 retrieve nomor_agenda_seksi langsung, tidak menggunakan input form
 		// karena di form didisable dan valuenya tidak diteruskan ke POST
 		$input['nomor_agenda_seksi'] = Suratmasuk::find($input['id'])->nomor_agenda_seksi;
+
+		if (Konfigurasi::find(9)->config_value != 1) {
+			$input['nomor_agenda_sekre'] = Suratmasuk::find($input['id'])->nomor_agenda_sekre;
+		}
 
 		// #2.1 rekam nama user pengupdate
 		$input['diupdate'] = Auth::user()->username;
@@ -390,6 +401,51 @@ class Suratmasuk extends Eloquent {
 
 		return $now_number;
 	}
+
+	/**
+	 * Generate nomor agenda sekre sesuai penomoran surat masuk SIDJP.
+	 */
+	public static function generate_nomor_agenda_sekre() {
+		$cfg_tahun_surat = Konfigurasi::find(4)->config_value;
+		$cfg_kode_agenda_sekre = Konfigurasi::find(10)->config_value;
+
+		$sekre_tahun = substr($cfg_tahun_surat, 2, 2);
+		$sekre_bulan = date('n');
+
+		$sekre_bulan_tahun = Suratmasuk::romanic_number($sekre_bulan) . '/' . $sekre_tahun;
+
+		$sekre_kode_agenda = '/' . $sekre_bulan_tahun . $cfg_kode_agenda_sekre;
+
+		// fleksibilitas untuk penomorannya di mana kode agenda sekre hanya opsional saja
+		$count_current = Suratmasuk::where('nomor_agenda_sekre', 'LIKE', '%' . $sekre_bulan_tahun . '%')->count();
+
+		$now_number = ($count_current + 1) . $sekre_kode_agenda;
+
+		return $now_number;
+	}
+
+	/**
+	 * Konversi bulan arabic ke roman
+	 * ref: http://stackoverflow.com/questions/14994941/numbers-to-roman-numbers-with-php
+	 */
+	public static function romanic_number($integer, $upcase = true) { 
+		$table = array('M'=>1000, 'CM'=>900, 'D'=>500, 'CD'=>400, 'C'=>100, 'XC'=>90, 'L'=>50, 'XL'=>40, 'X'=>10, 'IX'=>9, 'V'=>5, 'IV'=>4, 'I'=>1); 
+		$return = ''; 
+		while($integer > 0) 
+		{ 
+			foreach($table as $rom=>$arb) 
+			{ 
+				if($integer >= $arb) 
+				{ 
+					$integer -= $arb; 
+					$return .= $rom; 
+					break; 
+				} 
+			} 
+		} 
+
+		return $return; 
+	} 
 
 	/**
 	 * Mengumpulkan daftar id yang akan dicari. Hasilnya berupa array yang dapat

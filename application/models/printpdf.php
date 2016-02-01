@@ -94,7 +94,13 @@ class Printpdf {
 
 		//output label right
 		$pdf->SetFont('Times', '', $font_size);
-		$pdf->Cell($span1, $h2, 'Nomor Agenda:');
+		// print jika bukan Sekre --------------------------------------------------
+		$is_sekre = Konfigurasi::find(9)->config_value;
+		if ($is_sekre != 1) {
+			$pdf->Cell($span1, $h2, 'Nomor Agenda:');
+		} else {
+			$pdf->Cell($span1, $h2, 'Nomor Urut:');
+		}
 		$pdf->SetFont('Arial', '', $font_size);
 
 		// cek apakah nomor Agenda otomatis akan ikut dicetak?
@@ -132,18 +138,14 @@ class Printpdf {
 		$pdf->Cell($span4 + 10, $h2, $input->nomor_surat);
 
 		// divider
-		$pdf->Cell(10, $h2, '');
+		$pdf->Cell(10, $h2, '');		
 
-		// print jika bukan Sekre --------------------------------------------------
-		$is_sekre = Konfigurasi::find(9)->config_value;
-
-		if ($is_sekre != 1) {
-			// output label right
-			$pdf->SetFont('Times', '', $font_size);
-			$pdf->Cell($span1, $h2, 'No. Agenda Sekre:');
-			$pdf->SetFont('Arial', '', $font_size);
-			$pdf->Cell($span4 + 5 - $margin_right, $h2, $input->nomor_agenda_sekre);
-		}
+		// output label right
+		$pdf->SetFont('Times', '', $font_size);
+		$pdf->Cell($span1, $h2, 'No. Agenda Sekre:');
+		$pdf->SetFont('Arial', '', $font_size);
+		$pdf->Cell($span4 + 5 - $margin_right, $h2, $input->nomor_agenda_sekre);
+		
 
 		// underline content left
 		$line_x1 = $margin_left + $span1; 
@@ -152,14 +154,13 @@ class Printpdf {
 		$line_y2 = $line_y1;
 		$pdf->Line($line_x1, $line_y1, $line_x2, $line_y2);
 
-		if ($is_sekre != 1) {
-			// underline content right
-			$line_x1 = 210 - $margin_right - ($span4 + 5 - $margin_right); 
-			$line_y1 = $line_y1;
-			$line_x2 = 210 - $margin_right;
-			$line_y2 = $line_y1;
-			$pdf->Line($line_x1, $line_y1, $line_x2, $line_y2);
-		}
+		// underline content right
+		$line_x1 = 210 - $margin_right - ($span4 + 5 - $margin_right); 
+		$line_y1 = $line_y1;
+		$line_x2 = 210 - $margin_right;
+		$line_y2 = $line_y1;
+		$pdf->Line($line_x1, $line_y1, $line_x2, $line_y2);
+
 		$pdf->Ln();
 
 		/* line 8 */

@@ -28,6 +28,16 @@ class Suratmasuks_Controller extends Base_Controller {
 			->with('pengawasan_surat', $pengawasan_surat);
 	}
 
+	public function get_pengawasan_selesai() {
+		$pengawasan_surat_selesai = Suratmasukaktivitas::index_aktivitas_selesai();
+		$a = Suratmasukaktivitas::data_aktivitas($pengawasan_surat_selesai);
+
+		return View::make('suratmasuk.pengawasan_selesai')
+			->with('title', 'Agenda Surat :: Pengawasan Surat')
+			->with('pengawasan_surat_selesai', $pengawasan_surat_selesai)
+			->with('pengawasan_surat', $a);
+	}
+
 	public function get_aktivitas($id) {
 		$aktivitas_surat = Suratmasukaktivitas::aktivitas_surat($id);
 

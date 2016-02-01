@@ -292,3 +292,12 @@ php artisan migrate
 * Opsi khusus untuk Sekretariat sehingga tidak harus input kolom agenda Sekre
 * karena Sekretariat tidak menggunakannya. Nomor Agenda tetap terekam dalam kolom 
 * Nomor Agenda Seksi. Untuk hal download CSV, tidak ada perubahan.
+
+/********************************************************************************/
+* Date: [01/02/2016]
+* Add config:
+* Opsi untuk Sekretariat ditambahkan penomoran agenda sendiri sesuai dengan kode
+* penomoran aplikasi agenda surat SIDJP.
+*
+* NOTE:
+* Menu pengawasan surat akan ditambahkan fitur, tetapi saat ini belum diselesaikan.

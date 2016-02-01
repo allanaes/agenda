@@ -21,7 +21,7 @@
 							@if (Konfigurasi::find(9)->config_value != 1)
 								{{ Form::label('nomor_agenda_seksi', '* Nomor Agenda Seksi:') }}
 							@else
-								{{ Form::label('nomor_agenda_seksi', '* Nomor Agenda:') }}
+								{{ Form::label('nomor_agenda_seksi', '* Nomor Urut:') }}
 							@endif
 						</td>
 						<td>
@@ -39,7 +39,14 @@
 						</td>
 					</tr>
 					@else
-						{{ Form::hidden('nomor_agenda_sekre', $suratmasuk->nomor_agenda_sekre) }}
+						<tr>
+							<td class="field">
+								{{ Form::label('nomor_agenda_sekre', '* Nomor Agenda Sekre:') }} 
+							</td>
+							<td>
+								{{ Form::text('nomor_agenda_seksi', $suratmasuk->nomor_agenda_sekre, array('class'=>'span3', 'disabled'=>'')) }}
+							</td>
+						</tr>
 					@endif
 
 					<tr>

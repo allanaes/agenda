@@ -50,7 +50,8 @@
 				<tr><th>Nomor Agenda Seksi:</th><td> {{ e($suratmasuk->nomor_agenda_seksi) }}</td></tr>
 				<tr><th>Nomor Agenda Sekre:</th><td> {{ e($suratmasuk->nomor_agenda_sekre) }}</td></tr>
 			@else
-				<tr><th>Nomor Agenda:</th><td> {{ e($suratmasuk->nomor_agenda_seksi) }}</td></tr>
+				<tr><th>Nomor Urut:</th><td> {{ e($suratmasuk->nomor_agenda_seksi) }}</td></tr>
+				<tr><th>Nomor Agenda Sekre:</th><td> {{ e($suratmasuk->nomor_agenda_sekre) }}</td></tr>
 			@endif
 			<tr><th>Nomor Surat:</th><td> {{ e($suratmasuk->nomor_surat) }}</td></tr>
 			<tr><th>Tanggal Surat:</th><td> {{ e($suratmasuk->tgl_surat) }}</td></tr>

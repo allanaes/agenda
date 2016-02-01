@@ -18,7 +18,12 @@
 		<table class='displaytable'>
 			<tr>
 				<th class="right">ID</th>
-				<th>#</th>
+				@if (Konfigurasi::find(9)->config_value != 1)
+					<th>#</th>					
+				@else
+					<th>#</th>					
+					<th class="span2">Nomor Agenda</th>
+				@endif
 				<th class="span4">Nomor Surat</th>
 				<th class="span2">Tanggal Surat</th>
 				<th>Pengirim</th>
@@ -54,7 +59,12 @@
 				@endif
 					<?php $j++ ?>
 					<td class="idfield">{{ e($suratmasuk->id) }}</td>
-					<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
+					@if (Konfigurasi::find(9)->config_value != 1)
+						<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
+					@else
+						<td>{{ e($suratmasuk->nomor_agenda_seksi) }}</td>
+						<td>{{ e($suratmasuk->nomor_agenda_sekre) }}</td>
+					@endif
 					<td>{{ e($suratmasuk->nomor_surat) }}</td>
 					<td>{{ e($suratmasuk->tgl_surat) }}</td>
 					<td>{{ e($suratmasuk->pengirim) }}</td>
