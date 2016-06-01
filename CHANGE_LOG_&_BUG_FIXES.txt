@@ -301,3 +301,9 @@ php artisan migrate
 *
 * NOTE:
 * Menu pengawasan surat akan ditambahkan fitur, tetapi saat ini belum diselesaikan.
+
+/********************************************************************************/
+* Date: [01/06/2016]
+* Pengesuaian size varchar dari field disposisi dan petunjuk pada tabel surat_masuk
+* yang sebelumnya hanya 20 menjadi 50. Bug ini menyebabkan daftar disposisi pada
+* surat masuk terpotong dan akhirnya tidak tersimpan apabila disposisi dipilih banyak.

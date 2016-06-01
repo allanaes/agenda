@@ -70,7 +70,7 @@ return array(
 		'mysql' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
-			'database' => 'agenda_pelayanan_devel',
+			'database' => 'agenda_pelayanan',
 			'username' => 'root',
 			'password' => 'allanas',
 			'charset'  => 'utf8',
