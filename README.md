@@ -11,4 +11,10 @@ https://drive.google.com/file/d/0B5TQMpADUVBBYldyMU5WTGVsVU0/view?usp=sharing
 =============================================================================
 Petunjuk instalasi dan tips sudah include, kode yg SQLite tersebut belum sempat saya upload ke Github.
 
+Screenshots:
+============
+Untuk screenshot beberapa page pada aplikasi dapat dilihat pada link berikut:
+
+https://drive.google.com/open?id=0B5TQMpADUVBBWWVocnFxcFRoSms
+
 Semoga bermanfaat.
