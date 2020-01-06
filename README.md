@@ -6,8 +6,9 @@ Aplikasi berbasiskan framework Laravel yang dibuat sesuai dengan keperluan admin
 Untuk kemudahan instalasi dan backup, gunakan versi dengan SQLite berikut!
 ==========================================================================
 download link:
+[update tanggal 01-08-2019]
 
-https://drive.google.com/file/d/0B5TQMpADUVBBYldyMU5WTGVsVU0/view?usp=sharing
+https://drive.google.com/open?id=1eP0Ta33yVgmGNvxtEgNBY7wIktUBbfmQ
 =============================================================================
 Petunjuk instalasi dan tips sudah include, kode yg SQLite tersebut belum sempat saya upload ke Github.
 
