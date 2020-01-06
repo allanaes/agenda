@@ -8,7 +8,7 @@ Untuk kemudahan instalasi dan backup, gunakan versi dengan SQLite berikut!
 download link:
 [update tanggal 01-08-2019]
 
-https://drive.google.com/open?id=1eP0Ta33yVgmGNvxtEgNBY7wIktUBbfmQ
+https://drive.google.com/open?id=1K_xV91oBKo41ZEC9Os4AmlfIuoQLWUc7
 =============================================================================
 Petunjuk instalasi dan tips sudah include, kode yg SQLite tersebut belum sempat saya upload ke Github.
 
